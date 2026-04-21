@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Berwick Academy · International Student Handbook</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Berwick Academy 国际生生活手册</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   html { touch-action: manipulation; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -17,46 +16,45 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: rgba(201,168,76,0.2); }
   body { background: var(--cream); color: var(--ink); font-family: "Noto Sans SC", sans-serif; line-height: 1.8; -webkit-overflow-scrolling: touch; }
-
-  /* Language Selector */
-  .lang-selector { min-height: 100vh; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+  /* 语言选择首页 */
+  #language-selector { min-height: 100vh; width: 100%; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
   .selector-badge { font-size: 11px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; text-align: center; }
   .selector-title { font-family: "Playfair Display", serif; font-size: clamp(28px, 8vw, 48px); color: var(--cream); text-align: center; line-height: 1.2; margin-bottom: 16px; }
   .selector-subtitle { font-size: 13px; letter-spacing: 3px; color: rgba(245,240,232,0.5); text-align: center; margin-bottom: 36px; }
   .lang-buttons { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 300px; }
-  .lang-btn { display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.4); background: transparent; color: var(--gold); padding: 16px 20px; height: 56px; font-size: 16px; letter-spacing: 2px; text-decoration: none; border-radius: 4px; cursor: pointer; width: 100%; transition: border-color 0.2s, background 0.2s; }
-  .lang-btn:hover, .lang-btn:active { border-color: var(--gold); background: rgba(201,168,76,0.15); }
+  .lang-btn { display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.4); background: transparent; color: var(--gold); padding: 16px 20px; height: 56px; font-size: 16px; letter-spacing: 2px; text-decoration: none; border-radius: 4px; width: 100%; }
+  .lang-btn:active { border-color: var(--gold); background: rgba(201,168,76,0.15); }
   .selector-divider { width: 60px; height: 1px; background: var(--gold); margin: 36px auto; }
   .selector-author { font-size: 12px; color: rgba(245,240,232,0.4); letter-spacing: 2px; text-align: center; }
-
-  /* Cover */
-  .cover { min-height: 100vh; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+  /* 语言容器 纯CSS锚点控制 */
+  .lang-container { width: 100%; display: none; }
+  :target { display: block !important; }
+  :target ~ * { display: none !important; }
+  /* 封面通用样式 */
+  .cover { min-height: 100vh; width: 100%; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
   .cover-badge { font-size: 11px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; }
   .cover-title { font-family: "Playfair Display", serif; font-size: clamp(28px, 8vw, 48px); color: var(--cream); text-align: center; line-height: 1.2; margin-bottom: 16px; }
   .cover-subtitle { font-size: 13px; letter-spacing: 3px; color: rgba(245,240,232,0.5); text-align: center; margin-bottom: 36px; }
   .cover-divider { width: 60px; height: 1px; background: var(--gold); margin: 36px auto; }
-  .cover-author { font-size: 12px; color: rgba(245,240,232,0.4); letter-spacing: 2px; text-align: center; line-height: 2; }
-
-  /* TOC */
-  .toc { background: var(--ink); padding: 40px 20px; border-top: 1px solid rgba(201,168,76,0.2); }
+  .cover-author { font-size: 12px; color: rgba(245,240,232,0.4); letter-spacing: 2px; text-align: center; }
+  /* 目录样式 */
+  .toc { background: var(--ink); padding: 40px 20px; border-top: 1px solid rgba(201,168,76,0.2); width: 100%; }
   .toc-inner { max-width: 800px; margin: 0 auto; }
   .toc-label { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; }
   .toc-items { display: flex; flex-direction: column; gap: 12px; }
-  .toc-item { display: flex; align-items: center; gap: 12px; color: var(--cream); text-decoration: none; padding: 16px; min-height: 60px; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; cursor: pointer; background: transparent; width: 100%; text-align: left; transition: border-color 0.2s, background 0.2s; }
-  .toc-item:hover, .toc-item:active { border-color: var(--gold); background: rgba(201,168,76,0.15); }
+  .toc-item { display: flex; align-items: center; gap: 12px; color: var(--cream); text-decoration: none; padding: 16px; min-height: 60px; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
+  .toc-item:active { border-color: var(--gold); background: rgba(201,168,76,0.15); }
   .toc-num { font-family: "Playfair Display", serif; font-size: 24px; color: var(--gold); opacity: 0.6; min-width: 32px; }
   .toc-text { font-size: 15px; line-height: 1.4; }
   .toc-en { font-size: 10px; color: rgba(245,240,232,0.4); letter-spacing: 1px; margin-top: 2px; }
-
-  /* Sections */
+  /* 章节通用样式 */
   .section { padding: 40px 20px; max-width: 900px; margin: 0 auto; scroll-margin-top: 20px; width: 100%; }
   .section + .section { border-top: 1px solid rgba(26,26,46,0.1); }
   .section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 36px; }
   .section-num { font-family: "Playfair Display", serif; font-size: clamp(36px, 10vw, 56px); color: var(--gold); opacity: 0.2; line-height: 1; min-width: 40px; }
   .section-titles h2 { font-family: "Playfair Display", serif; font-size: clamp(22px, 6vw, 32px); color: var(--ink); line-height: 1.2; }
-  .section-subtitle-text { font-size: 11px; color: rgba(26,26,46,0.4); letter-spacing: 1px; border-bottom: 1px solid rgba(26,26,46,0.15); padding-bottom: 2px; margin-top: 8px; }
-
-  /* Content */
+  .section-subtitle { font-size: 11px; color: rgba(26,26,46,0.4); letter-spacing: 1px; border-bottom: 1px solid rgba(26,26,46,0.15); padding-bottom: 2px; margin-top: 8px; }
+  /* 内容样式 */
   .content-block { margin-bottom: 24px; }
   .content-block h3 { font-size: 18px; margin-bottom: 12px; color: var(--ink); }
   .content-block h4 { font-size: 16px; margin-bottom: 8px; color: var(--ink); }
@@ -66,34 +64,29 @@
   .content-block table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
   .content-block table th, .content-block table td { border: 1px solid rgba(26,26,46,0.15); padding: 10px; text-align: left; }
   .content-block table th { background: var(--mist); font-weight: 500; }
-
-  /* Cards */
+  /* 卡片网格 */
   .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
   .card { background: var(--mist); padding: 20px; border-left: 3px solid var(--gold); border-radius: 4px; }
   .card-icon { font-size: 28px; margin-bottom: 12px; }
   .card-title { font-size: 15px; font-weight: 500; letter-spacing: 1px; margin-bottom: 8px; color: var(--ink); }
   .card-body { font-size: 14px; color: rgba(26,26,46,0.7); line-height: 1.7; }
-
-  /* Tip Box */
+  /* 提示框 */
   .tip-box { background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03)); border: 1px solid rgba(201,168,76,0.3); padding: 20px 16px; margin: 20px 0; position: relative; border-radius: 4px; }
   .tip-box::before { content: '💡'; position: absolute; top: -12px; left: 20px; background: var(--cream); padding: 0 8px; font-size: 16px; }
   .tip-box p { font-size: 15px; color: rgba(26,26,46,0.8); line-height: 1.8; }
-
-  /* Quote */
+  /* 学生引言 */
   .student-quote { border-left: 3px solid var(--red); padding: 16px; margin: 24px 0; background: rgba(139,38,53,0.04); border-radius: 4px; }
   .quote-text { font-size: 15px; font-style: italic; color: var(--ink); line-height: 1.8; }
   .quote-attr { font-size: 11px; color: rgba(26,26,46,0.4); letter-spacing: 2px; margin-top: 8px; }
-
-  /* Divider */
+  /* 分隔线 */
   .section-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(26,26,46,0.1), transparent); margin: 36px 0; }
-
-  /* Footer */
-  footer { background: var(--ink); padding: 40px 20px; text-align: center; }
+  /* 页脚 */
+  footer { background: var(--ink); padding: 40px 20px; text-align: center; width: 100%; }
   footer p { color: rgba(245,240,232,0.3); font-size: 12px; letter-spacing: 2px; line-height: 2; }
   footer .gold { color: var(--gold); }
-  .switch-lang-btn { display: inline-flex; align-items: center; justify-content: center; margin-top: 24px; border: 1px solid rgba(201,168,76,0.4); background: transparent; color: var(--gold); padding: 14px 20px; height: 50px; font-size: 14px; letter-spacing: 2px; text-decoration: none; border-radius: 4px; min-width: 200px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
-  .switch-lang-btn:hover, .switch-lang-btn:active { border-color: var(--gold); background: rgba(201,168,76,0.15); }
-
+  .switch-lang-btn { display: inline-flex; align-items: center; justify-content: center; margin-top: 24px; border: 1px solid rgba(201,168,76,0.4); background: transparent; color: var(--gold); padding: 14px 20px; height: 50px; font-size: 14px; letter-spacing: 2px; text-decoration: none; border-radius: 4px; min-width: 200px; }
+  .switch-lang-btn:active { border-color: var(--gold); background: rgba(201,168,76,0.15); }
+  /* 小屏适配 */
   @media (max-width: 375px) {
     .lang-btn { height: 52px; font-size: 15px; }
     .toc-item { min-height: 56px; padding: 14px; }
@@ -103,1016 +96,2487 @@
 </style>
 </head>
 <body>
-<div id="app"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-
-<script type="text/babel">
-// ============================================================
-// 📦 DATA LAYER — Edit content here, no React knowledge needed
-// ============================================================
-const TRANSLATIONS = {
-  zh: {
-    meta: { lang: "zh", font: '"Noto Sans SC", sans-serif', flag: "🇨🇳", label: "中文" },
-    cover: {
-      badge: "🏫 Berwick Academy · South Berwick, Maine",
-      title: "📚 国际生生活手册",
-      subtitle: "International Student Handbook",
-      author: "官方信息源自Berwick Academy官网\n✍️ 现任住校国际生联合撰写"
-    },
-    toc: { label: "📖 目录" },
-    switchLang: "🔄 切换语言",
-    footer: {
-      title: "Berwick Academy · 全球桥梁计划 🌉",
-      lines: ["官方信息源自 Berwick Academy 官网", "学生经验由现任住宿国际生撰写", "创校 1791 年 · 缅因州南伯威克"]
-    },
-    sections: [
-      {
-        id: "advantage", num: "00",
-        title: "🏫 官方办学承诺与学校概况", subtitle: "The Berwick Advantage",
-        blocks: [
-          { type: "p", content: "Berwick Academy建校于1791年，由John Hancock签署建校使命，秉承"美德与实用知识"的办学理念，是美国新英格兰地区历史悠久的私立大学预科学校，历经两百余年发展，始终坚持高品质的精英教育 🎓。" },
-          { type: "h3", content: "👨🏫 学校教师团队5项核心承诺" },
-          { type: "ol", items: [
-            "规模足以提供丰富的课程选择，同时小到可以为你定制个性化的学习体验",
-            "助力你在复杂多变的世界中，找到属于自己的成功与人生目标",
-            "赋能你在学术上超越自我预期，为大学申请做好全面准备",
-            "以健康的竞技挑战你，让你在体育与艺术领域绽放光彩",
-            "以丰富的实践机会拓宽你的视野，助力你追求卓越，释放独一无二的个人潜能"
-          ]},
-          { type: "h3", content: "📊 学校官方核心数据" },
-          { type: "cards", items: [
-            { icon: "📅", title: "建校时间", body: "1791年" },
-            { icon: "🏞️", title: "校园规模", body: "80英亩" },
-            { icon: "👥", title: "总招生人数", body: "520人（Pre-K至12年级）" },
-            { icon: "📊", title: "师生比", body: "8:1 精英小班" },
-            { icon: "🌍", title: "国际生比例", body: "约5%" },
-            { icon: "📍", title: "地理位置", body: "波士顿以北约1小时车程" },
-            { icon: "🚌", title: "生源覆盖", body: "全美85个社区，25条巴士线路" },
-            { icon: "💴", title: "助学金覆盖", body: "41%在校生获经济资助" }
-          ]}
-        ]
-      },
-      {
-        id: "prearrival", num: "01",
-        title: "✈️ 新生入学前必读", subtitle: "Pre-Arrival Guide",
-        blocks: [
-          { type: "p", content: "本章节为国际生赴美入校前的核心准备指南，结合学校官方规则与在校生真实经验，帮你避坑少走弯路 🚫❌。" },
-          { type: "h3", content: "🛬 一、落地与到校交通" },
-          { type: "cards", items: [
-            { icon: "✈️", title: "推荐机场", body: "波士顿洛根国际机场 (BOS)" },
-            { icon: "🚌", title: "推荐交通", body: "C&J巴士直达Dover/Portsmouth" },
-            { icon: "📅", title: "入住截止", body: "开学前1天" }
-          ]},
-          { type: "h3", content: "🎒 二、必带物品清单" },
-          { type: "ol", items: [
-            "<strong>生活必需品</strong>：床品（学校仅提供基础床垫，床单/被套/枕套/被子需自备）；非110V电压地区学生，务必携带美标转换插头 🔌",
-            "<strong>个人物品</strong>：可带家乡调料/零食缓解思乡之情 🥘🍬；有常用药者，需附带英文说明书及有效处方单 💊",
-            "<strong>重要文件</strong>：I-20原件、疫苗证明、录取通知书、护照及签证复印件等核心文件，务必放入随身行李，切勿托运 📄"
-          ]}
-        ]
-      },
-      {
-        id: "dorm", num: "02",
-        title: "🏠 宿舍生活", subtitle: "Dorm Life",
-        blocks: [
-          { type: "p", content: "Berwick Academy为高中寄宿生提供专属独栋住宅式宿舍，是本校Hilltop校园生活的核心组成部分 🏡。" },
-          { type: "h3", content: "🛏️ 一、房间与配套设施" },
-          { type: "cards", items: [
-            { icon: "🛏️", title: "房间配置", body: "2层独栋，6间房（单/双/三人间），独立卫浴" },
-            { icon: "🍳", title: "厨房设施", body: "全配冰箱/微波炉/厨具/洗碗机" },
-            { icon: "🎮", title: "公共区域", body: "免费洗衣房、TV+PS5客厅" },
-            { icon: "📱", title: "电子设备", body: "无使用限制" }
-          ]},
-          { type: "h3", content: "🔢 二、房间分配规则" },
-          { type: "p", content: "房间采用<strong>住宿资历优先级选房制</strong>：按学生在校住宿年限排序，住宿时间越长，选房优先级越高；支持国际生与本地生申请同住 🤝。" },
-          { type: "h3", content: "📋 三、日常管理与规则" },
-          { type: "ul", items: [
-            "餐饮安排：每晚18:00由学校食堂统一配餐至宿舍，全体住宿生在前厅共同用餐 🍽️",
-            "作息要求：工作日晚23:00熄灯，仅可进行不打扰他人的安静活动；周末宵禁规则较工作日更为宽松 ⏰",
-            "外卖与快递：宿舍支持外卖、快递正常配送 📦🍕",
-            "访客管理：如需带校外朋友/访客进入宿舍，须提前提交正式申请，审批通过后方可带入 🚪",
-            "公共管理：全体住宿生轮流承担公共区域清洁杂务，共同维护生活环境 🧹"
-          ]},
-          { type: "h3", content: "👨‍👩‍👧‍👦 四、舍监与安全保障" },
-          { type: "ul", items: [
-            "宿舍共配备5位舍监（Dorm Parents），其中3位与学生同住宿舍楼，其余2-3位居住在学校周边；舍监风格各异，但均以学生安全与需求为核心，遇到任何问题均可第一时间寻求帮助 🆘",
-            "外出管理：每次离开宿舍均需在学校网页系统完成外出登记，家长与老师可实时查看学生去向记录，全方位保障学生安全 📍",
-            "健康支持：学校设有健康中心处理常见疾病，专业训练师办公室处理运动损伤；若情况严重，舍监会第一时间陪同学生前往医院就诊 🏥",
-            "官方健康支持体系：学校设有Student Wellness Advisory Team (SWAT) 学生健康咨询团队，为学生提供全方位的健康与心理支持 🧠"
-          ]},
-          { type: "quote", text: ""我是第一次住宿舍，刚开始真的很不适应——有室友、有固定的晚餐时间，一切都是陌生的。但当我们开始一起打PS5、一起参加运动，我突然就融入了。有不同的想法直接说出来，室友都愿意互相迁就，大家其实都特别友善 💛。"", attr: "— 现任中国住校生" }
-        ]
-      },
-      {
-        id: "academics", num: "03",
-        title: "📝 学术与升学指导", subtitle: "Academics & Counseling",
-        blocks: [
-          { type: "h4", content: "📚 官方培养体系：Pathway of a Learner" },
-          { type: "p", content: "在Berwick Academy，学习不是一张清单，而是一段完整的成长旅程。学校以「美德与实用知识」为核心，打造了从Pre-K到12年级的Pathway of a Learner培养体系，分Lower School（小学）、Middle School（初中）、Upper School（高中）三个阶段，全程培养学生的好奇心、自信心与品格 🧠💪。" },
-          { type: "h3", content: "📖 一、课程与选课指南" },
-          { type: "ul", items: [
-            "<strong>官方特色课程-Pinnacle Courses</strong>：高中部专属高阶课程，引导学生解决真实世界的问题与想法，以有意义的方式应用所学知识，是学校学术体系的核心特色 🚀",
-            "<strong>创新工坊-Fabrication Studio</strong>：学校专属制造工坊，培养高中生的问题解决能力与实践创新能力 🛠️",
-            "课程体系：学校<strong>不提供AP课程</strong>，但开设与AP课程同等学术难度的高阶荣誉课程，满足顶尖大学预科的学术要求，助力学生升学发展 🎯",
-            "语言支持：学校不提供ESL语言辅导课程，所有课程均为全英文授课环境 🗣️",
-            "第一年必修课程：英语、数学、第二外语、历史4门核心课程为新生第一年必修 📚",
-            "选课建议：推荐新生第一年搭配美术类等学术压力较小的课程，平稳适应美国高中的学术节奏 🎨"
-          ]},
-          { type: "h3", content: "🏆 二、荣誉课程列表" },
-          { type: "p", content: "荣誉英语、荣誉数学、荣誉生物、荣誉化学、荣誉历史、荣誉外语系列课程、Pinnacle高阶特色课程" },
-          { type: "h3", content: "🎓 三、毕业学分要求" },
-          { type: "cards", items: [
-            { icon: "📚", title: "总学分要求", body: "至少22学分" },
-            { icon: "📖", title: "英语", body: "4学分" },
-            { icon: "🧮", title: "数学", body: "3学分" },
-            { icon: "🔬", title: "自然科学", body: "3学分" },
-            { icon: "🏛️", title: "社会科学", body: "3学分" },
-            { icon: "🗣️", title: "第二外语", body: "2学分" },
-            { icon: "🎨", title: "艺术", body: "2学分" },
-            { icon: "🏃", title: "健康与体育", body: "1学分" }
-          ]},
-          { type: "h3", content: "📚 四、校园学术资源" },
-          { type: "ul", items: [
-            "学校图书馆开放时间：<strong>每日8:00-17:00</strong>，提供自习空间、图书借阅、学术资料查询等服务 📖",
-            "课后辅导：学校提供课后学业辅导支持，学生可按需预约对应学科的辅导服务 📝",
-            "学生领导力机会：包括12年级级长（Prefects）、学生健康咨询团队（SWAT）等 🚀"
-          ]},
-          { type: "h3", content: "🎓 五、大学升学指导" },
-          { type: "ul", items: [
-            "师资配置：学校College Counseling升学指导办公室配备3位专属升学顾问，全程跟进学生升学规划 🧑‍🏫",
-            "服务节奏：10年级起与学生建立一对一专属对接，11年级开启常态化升学规划沟通会议，12年级提供大学申请全流程专属指导 ✍️",
-            "升学成果：每年均有多名学生升入全美前20院校及常春藤联盟（Ivy League）高校 🥇"
-          ]}
-        ]
-      },
-      {
-        id: "campus", num: "04",
-        title: "🎨 校园日常与社团活动", subtitle: "Campus Life & Clubs",
-        blocks: [
-          { type: "h3", content: "🕒 一、校园日常作息" },
-          { type: "cards", items: [
-            { icon: "⏰", title: "上课时间", body: "8:00-15:00，课间5分钟" },
-            { icon: "🍽️", title: "午餐时间", body: "50分钟，每日更新菜单" },
-            { icon: "🥗", title: "餐饮特色", body: "国际美食日，素食/无麸质选项" }
-          ]},
-          { type: "h3", content: "🎭 二、官方艺术与活动体系" },
-          { type: "p", content: "学校鼓励学生全面发展，学生运动员可同时参与戏剧舞台表演、乐队演奏等艺术项目，体育与艺术发展互不冲突 🎵⚽。" },
-          { type: "ul", items: [
-            "初中部：每年固定举办音乐剧演出，报名热度极高，部分热门角色会由多名学生分场次演绎 🎶",
-            "高中部：每年举办视觉与表演艺术展、私人音乐课汇演、舞蹈团专场演出、戏剧/音乐剧公演等艺术活动 🎨",
-            "年度传统活动：蓝白周/蓝白日、祖父母与特殊朋友日、Berwick创新庆典等 🎪"
-          ]},
-          { type: "h3", content: "🧩 三、官方社团全名单" },
-          { type: "h4", content: "📝 学术类社团" },
-          { type: "p", content: "数学竞赛社、科学奥林匹克社、辩论社、演讲社、学术碗社、编程社、写作社、历史社、机器人社 🤖" },
-          { type: "h4", content: "🎨 艺术类社团" },
-          { type: "p", content: "合唱团、乐队、戏剧社、舞蹈社、视觉艺术社、摄影社、手工创作社、电影社、时装设计社 📸" },
-          { type: "h4", content: "🤝 服务类社团" },
-          { type: "p", content: "社区服务社、志愿者联盟、环保社、慈善社、动物保护社、校园服务社、国际援助社 🌱" },
-          { type: "h4", content: "🌍 文化类社团" },
-          { type: "p", content: "中国文化社、欧洲文化社、多元文化社、国际生联谊社、语言交流社 🗣️" }
-        ]
-      },
-      {
-        id: "athletics", num: "05",
-        title: "⚽ 校队与体育", subtitle: "Athletics",
-        blocks: [
-          { type: "h4", content: "🐶 官方体育品牌：Berwick Bulldogs" },
-          { type: "p", content: "体育是Berwick Academy校园文化的核心组成部分，学校以健康的竞技理念，鼓励学生在体育领域挑战自我、绽放光彩 💪。每日放学后均有固定训练，绝大多数教练同时为学校任课老师，高度重视学生的学业与体育的平衡发展 📚⚽。" },
-          { type: "h3", content: "🏆 一、全量体育项目" },
-          { type: "h4", content: "🍂 秋季校队（Varsity/JV）" },
-          { type: "cards", items: [
-            { icon: "⚽", title: "男生项目", body: "足球、越野、高尔夫" },
-            { icon: "🏐", title: "女生项目", body: "足球、越野、排球" },
-            { icon: "📅", title: "赛季时间", body: "9月-11月" }
-          ]},
-          { type: "h4", content: "⛄ 冬季校队（Varsity/JV）" },
-          { type: "cards", items: [
-            { icon: "🏀", title: "男生项目", body: "篮球、摔跤" },
-            { icon: "🏊‍♀️", title: "女生项目", body: "篮球、游泳" },
-            { icon: "📅", title: "赛季时间", body: "12月-2月" }
-          ]},
-          { type: "h4", content: "🌸 春季校队（Varsity/JV）" },
-          { type: "cards", items: [
-            { icon: "⚾", title: "男生项目", body: "棒球、网球、田径" },
-            { icon: "🥎", title: "女生项目", body: "垒球、网球、田径" },
-            { icon: "📅", title: "赛季时间", body: "3月-5月" }
-          ]},
-          { type: "h3", content: "🎉 二、校园体育文化" },
-          { type: "ul", items: [
-            "官方升学通道：每年均有大量学生运动员升入NCAA D1、D2、D3级别的大学 🎓",
-            "比赛氛围：主场比赛会有大量在校学生到场加油助威，客场比赛常有学生家长自愿为校队提供团队晚餐 🧑‍👩‍👧‍👦",
-            "国际生专属优势：体育是国际学生快速融入校园的最佳渠道之一，运动场上的交流无语言壁垒 🤝"
-          ]},
-          { type: "quote", text: ""我参加了足球、棒球和网球校队，体育让我很快就和队友们建立了最真实的友谊。而且打球的时候大家会用很多俚语，这是在课堂上完全学不到的东西，也让我的英语进步得特别快 📈。"", attr: "— 现任中国住校生" }
-        ]
-      },
-      {
-        id: "local", num: "06",
-        title: "🏙️ 周边生活", subtitle: "Local Life",
-        blocks: [
-          { type: "p", content: "South Berwick是一座宁静的新英格兰小镇，常住人口约7500人，镇上配套齐全，更丰富的生活资源均集中在车程30分钟以内的范围，学校位于波士顿以北1小时车程，交通便捷 🚗。" },
-          { type: "h3", content: "🛒 一、日常采购与餐饮" },
-          { type: "cards", items: [
-            { icon: "🛍️", title: "日常超市", body: "Nature's Way Market / Hannaford" },
-            { icon: "🍜", title: "餐饮选择", body: "中餐馆、韩料、日料（30分钟车程内）" },
-            { icon: "💸", title: "购物贴士", body: "新罕布什尔州无消费税" }
-          ]},
-          { type: "h3", content: "📞 二、本地基础服务" },
-          { type: "cards", items: [
-            { icon: "🏦", title: "银行服务", body: "M&T银行，可开本地账户" },
-            { icon: "📱", title: "通讯服务", body: "实体SIM/eSIM可选" },
-            { icon: "🚗", title: "出行支持", body: "宿舍专属车辆接送" }
-          ]},
-          { type: "h3", content: "🎪 三、周末活动" },
-          { type: "p", content: "学校会定期组织观影、沙滩散步、高尔夫等周末集体活动 🏖️⛳；每年固定安排波士顿红袜队（Boston Red Sox）棒球赛观赛之旅 ⚾。" },
-          { type: "quote", text: ""小镇很安静，但其实一点都不会无聊。车程30分钟以内，华人超市、韩国烧烤、日料店都能找到，周末的活动学校也安排得很丰富。最重要的是，这份安静能让你真正专注在学业和运动上，收获成长 📈。"", attr: "— 现任中国住校生" }
-        ]
-      },
-      {
-        id: "fees", num: "07",
-        title: "💰 学费与入学要求", subtitle: "Tuition & Admission",
-        blocks: [
-          { type: "h3", content: "💴 一、2026-2027学年官方费用" },
-          { type: "cards", items: [
-            { icon: "💵", title: "学费", body: "约$50,000/年（初高中统一）" },
-            { icon: "🏠", title: "住宿费", body: "$18,500/年（含三餐）" },
-            { icon: "🩹", title: "保险费", body: "$1,800/年（强制）" },
-            { icon: "🎫", title: "其他费用", body: "申请费$150、注册费$500、活动费$1,200" }
-          ]},
-          { type: "h4", content: "📋 保险要求" },
-          { type: "p", content: "必须购买美国指定校园医疗保险 🩹，海外保险不予认可；该保险全面覆盖全年医疗、急诊、住院服务 🏥。" },
-          { type: "h4", content: "💳 支付方式" },
-          { type: "p", content: "支持电汇、信用卡、线上支付平台，需在开学前30天缴清全部费用，可申请分期缴费（需学校审核）📅。" },
-          { type: "h3", content: "📋 二、国际生官方入学要求" },
-          { type: "h4", content: "📝 申请流程" },
-          { type: "ol", items: [
-            "在线提交申请表及申请费",
-            "递交在校成绩单、推荐信、个人申请文书 ✍️",
-            "参加校园面试（线上/线下 🎥🤝）",
-            "学校综合审核，发放录取结果 📧",
-            "确认录取，缴纳定金，申请I-20 📄",
-            "办理签证，完成入学注册手续 ✅"
-          ]},
-          { type: "h4", content: "🗣️ 语言能力评估说明" },
-          { type: "p", content: "学校<strong>无硬性标准化语言成绩要求</strong>，将通过面试表现、在校学业成绩单、个人文书等材料，综合评估学生的英语能力与全英文授课环境的适配度 🧐。" },
-          { type: "h4", content: "💉 疫苗强制要求" },
-          { type: "p", content: "需完成美国要求的全套疫苗：麻疹、腮腺炎、风疹、水痘、百白破、乙肝、流感、脑膜炎疫苗，提交官方疫苗证明，未达标者不予入学 📄。" },
-          { type: "h4", content: "📄 I-20发放规则" },
-          { type: "ul", items: [
-            "收到录取通知书及定金后，10个工作日内发放I-20 📧",
-            "需提供资金证明，证明有能力支付学费及生活费 💵",
-            "仅向符合美国移民局要求的国际学生发放，需完成全部申请流程 ✅"
-          ]}
-        ]
-      },
-      {
-        id: "visa", num: "08",
-        title: "🆔 签证与健康安全", subtitle: "Visa & Health Safety",
-        blocks: [
-          { type: "h3", content: "📄 一、签证与合规支持" },
-          { type: "h4", content: "🌍 国际生专属对接人" },
-          { type: "p", content: "国际生在校期间的各类问题，均可联系专属负责人 <strong>Ms. Gabarro</strong>，联系邮箱：mgabarro@berwickacademy.org 📧" },
-          { type: "h4", content: "🆔 F1签证服务" },
-          { type: "p", content: "学校设有专人负责F1学生签证相关事宜，包括SEVIS信息更新、I-20文件维护、假期中出入境文件支持等；SEVIS信息每年暑假统一更新 📅。" },
-          { type: "h3", content: "🩹 二、健康安全官方服务" },
-          { type: "cards", items: [
-            { icon: "🏥", title: "健康中心", body: "周一至周五 8:00-18:00" },
-            { icon: "🧠", title: "心理咨询", body: "免费1对1，周一至周五 9:00-17:00" },
-            { icon: "🚨", title: "应急响应", body: "24小时安保+一键报警系统" },
-            { icon: "📞", title: "应急热线", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      },
-      {
-        id: "parent", num: "09",
-        title: "📞 家长沟通渠道", subtitle: "Parent Communication",
-        blocks: [
-          { type: "h3", content: "🤝 一、家长会安排" },
-          { type: "ul", items: [
-            "学期中家长会：每学年2次，线上+线下同步开展 🎥🤝",
-            "毕业专项家长会：毕业学年春季学期举办，专属升学指导沟通 🎓"
-          ]},
-          { type: "h3", content: "🔐 二、家长门户" },
-          { type: "p", content: "学校专属家长线上平台，可实时查询学生在校成绩、考勤情况、校园通知、作业安排、缴费记录，同步学生在校动态与成长情况 📊📈。" },
-          { type: "h3", content: "📢 三、学校通知系统" },
-          { type: "p", content: "邮件、短信、家长专属APP三重通知体系 📧📱，涵盖校园活动、假期安排、紧急通知、学业提醒等全维度信息，确保家校信息及时同步 🤝。" },
-          { type: "h3", content: "🌍 四、国际生家长专属服务" },
-          { type: "p", content: "提供校园参观、住宿咨询、本地生活指导 🗺️；配备国际生家长专属对接专员，全程提供沟通答疑与家校对接服务 🧑‍🏫。" }
-        ]
-      },
-      {
-        id: "ending", num: "10",
-        title: "📎 结语与附录", subtitle: "Final Words & Appendix",
-        blocks: [
-          { type: "p", content: "欢迎来到Berwick Academy 🎉，这所拥有两百余年历史的学校，不仅会为你提供优质的学术教育，更会给你一段充满温暖与成长的留学生活 💛。" },
-          { type: "p", content: "本手册所有在校生经验内容均来自在校国际生的真实经历与一手信息 ✨，官方内容均源自Berwick Academy官网，只为帮你更快适应这里的生活，少走弯路 🚫❌。" },
-          { type: "p", content: "学校的国际生办公室、舍监、任课老师，还有已经在这里的学长学姐，都是你可以随时求助的对象 🤝。愿你在Berwick的日子里，学业有成，收获真挚的友谊，看见更广阔的世界，成为更好的自己 💪！" },
-          { type: "quote", text: ""这里不是完美的，但这里一定能给你意想不到的成长 📈。勇敢一点，去尝试，去交流，去体验，你会爱上这里的 💖。"", attr: "— 全体在校国际住校生" },
-          { type: "divider" },
-          { type: "h3", content: "📎 附录：紧急联系方式" },
-          { type: "cards", items: [
-            { icon: "📞", title: "学校主线电话", body: "+1 (207) 384-2164" },
-            { icon: "📧", title: "国际生办公室", body: "international@berwickacademy.org" },
-            { icon: "👩‍💼", title: "专属对接人", body: "Ms. Gabarro, mgabarro@berwickacademy.org" },
-            { icon: "🚨", title: "24小时应急热线", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      }
-    ]
-  },
-  en: {
-    meta: { lang: "en", font: '"Noto Sans", sans-serif', flag: "🇺🇸", label: "English" },
-    cover: {
-      badge: "🏫 Berwick Academy · South Berwick, Maine",
-      title: "📚 International Student Handbook",
-      subtitle: "Welcome to Berwick Academy",
-      author: "Official Info from Berwick Academy\n✍️ Written by Current Boarding Students"
-    },
-    toc: { label: "📖 Table of Contents" },
-    switchLang: "🔄 Switch Language",
-    footer: {
-      title: "Berwick Academy · Global Bridge Project 🌉",
-      lines: ["Official info sourced from Berwick Academy website", "Student experiences written by current boarding international students", "Est. 1791 · South Berwick, Maine"]
-    },
-    sections: [
-      {
-        id: "advantage", num: "00",
-        title: "🏫 School Overview & The Berwick Advantage", subtitle: "The Berwick Advantage",
-        blocks: [
-          { type: "p", content: "Founded in 1791 with a mission signed by John Hancock, Berwick Academy is one of New England's oldest independent schools, committed to "virtue and useful knowledge." For over two centuries, the school has maintained a dedication to high-quality, personalized education 🎓." },
-          { type: "h3", content: "👨‍🏫 5 Core Commitments from Our Faculty" },
-          { type: "ol", items: [
-            "Large enough to offer a rich curriculum, small enough to personalize your education",
-            "Help you find your own version of success and purpose in a complex world",
-            "Challenge you to exceed your own academic expectations and prepare for college",
-            "Challenge you with healthy competition in athletics and the arts",
-            "Broaden your perspective through hands-on opportunities and help you pursue excellence"
-          ]},
-          { type: "h3", content: "📊 Key School Facts" },
-          { type: "cards", items: [
-            { icon: "📅", title: "Founded", body: "1791" },
-            { icon: "🏞️", title: "Campus Size", body: "80 acres" },
-            { icon: "👥", title: "Total Enrollment", body: "520 students (Pre-K to Grade 12)" },
-            { icon: "📊", title: "Student-Faculty Ratio", body: "8:1" },
-            { icon: "🌍", title: "International Students", body: "~5% of enrollment" },
-            { icon: "📍", title: "Location", body: "~1 hour north of Boston" },
-            { icon: "🚌", title: "Community Reach", body: "85 communities, 25 bus routes" },
-            { icon: "💴", title: "Financial Aid", body: "41% of students receive aid" }
-          ]}
-        ]
-      },
-      {
-        id: "prearrival", num: "01",
-        title: "✈️ Pre-Arrival Guide", subtitle: "Pre-Arrival Guide",
-        blocks: [
-          { type: "p", content: "This section covers everything you need to prepare before arriving at Berwick Academy, combining official school policies with firsthand advice from current students 🚫❌." },
-          { type: "h3", content: "🛬 Getting to Campus" },
-          { type: "cards", items: [
-            { icon: "✈️", title: "Recommended Airport", body: "Boston Logan International (BOS)" },
-            { icon: "🚌", title: "Recommended Transport", body: "C&J Bus to Dover/Portsmouth" },
-            { icon: "📅", title: "Check-in Deadline", body: "1 day before school starts" }
-          ]},
-          { type: "h3", content: "🎒 What to Bring" },
-          { type: "ol", items: [
-            "<strong>Bedding</strong>: School provides a basic mattress only — bring sheets, duvet, pillowcases. Students from non-110V regions must bring a US power adapter 🔌",
-            "<strong>Personal Items</strong>: Snacks from home can help with homesickness 🥘🍬; bring any regular medications with English labels and valid prescriptions 💊",
-            "<strong>Important Documents</strong>: I-20 original, vaccination records, acceptance letter, passport and visa copies — always keep in carry-on, never checked baggage 📄"
-          ]}
-        ]
-      },
-      {
-        id: "dorm", num: "02",
-        title: "🏠 Dorm Life", subtitle: "Dorm Life",
-        blocks: [
-          { type: "p", content: "Berwick Academy provides dedicated residential housing for high school boarding students — a standalone house-style dormitory that is central to life on the Hilltop campus 🏡." },
-          { type: "h3", content: "🛏️ Room & Facilities" },
-          { type: "cards", items: [
-            { icon: "🛏️", title: "Room Setup", body: "2-floor house, 6 rooms (single/double/triple), private bathrooms" },
-            { icon: "🍳", title: "Kitchen", body: "Fridge, microwave, cookware, dishwasher" },
-            { icon: "🎮", title: "Common Areas", body: "Free laundry, TV + PS5 lounge" },
-            { icon: "📱", title: "Electronics", body: "No usage restrictions" }
-          ]},
-          { type: "h3", content: "🔢 Room Assignment" },
-          { type: "p", content: "Rooms are assigned by <strong>seniority</strong>: the longer you've lived in the dorm, the higher your priority when choosing rooms. International and domestic students may request to room together 🤝." },
-          { type: "h3", content: "📋 Rules & Daily Life" },
-          { type: "ul", items: [
-            "Meals: Every evening at 6:00 PM, the school cafeteria delivers dinner to the dorm; all boarders eat together in the common area 🍽️",
-            "Curfew: Lights out at 11:00 PM on weekdays; weekends are more relaxed ⏰",
-            "Delivery: Food delivery and packages are allowed 📦🍕",
-            "Visitors: Guests from off-campus require advance approval before entering 🚪",
-            "Chores: All boarders take turns cleaning common areas 🧹"
-          ]},
-          { type: "quote", text: '"It was my first time living in a dorm and honestly it felt strange at first — having roommates, fixed dinner time, everything was new. But once we started playing PS5 together and doing sports, I just fit in. Speak up if you disagree, roommates are willing to compromise, everyone is genuinely kind 💛."', attr: "— Current Chinese boarding student" }
-        ]
-      },
-      {
-        id: "academics", num: "03",
-        title: "📝 Academics & College Counseling", subtitle: "Academics & Counseling",
-        blocks: [
-          { type: "h3", content: "📖 Curriculum Highlights" },
-          { type: "ul", items: [
-            "<strong>Pinnacle Courses</strong>: Upper School signature courses where students tackle real-world problems and apply knowledge meaningfully 🚀",
-            "<strong>Fabrication Studio</strong>: A hands-on makerspace developing problem-solving and creative skills 🛠️",
-            "No AP courses — instead, rigorous Honors-level courses matching AP difficulty 🎯",
-            "No ESL support — all courses are full-English immersion 🗣️",
-            "Year 1 required: English, Math, Second Language, History 📚",
-            "Tip: Balance with an art elective in your first year for a smoother transition 🎨"
-          ]},
-          { type: "h3", content: "🎓 Graduation Requirements" },
-          { type: "cards", items: [
-            { icon: "📚", title: "Total Credits", body: "At least 22" },
-            { icon: "📖", title: "English", body: "4 credits" },
-            { icon: "🧮", title: "Math", body: "3 credits" },
-            { icon: "🔬", title: "Science", body: "3 credits" },
-            { icon: "🏛️", title: "Social Studies", body: "3 credits" },
-            { icon: "🗣️", title: "World Language", body: "2 credits" },
-            { icon: "🎨", title: "Arts", body: "2 credits" },
-            { icon: "🏃", title: "Health & PE", body: "1 credit" }
-          ]},
-          { type: "h3", content: "🎓 College Counseling" },
-          { type: "ul", items: [
-            "3 dedicated college counselors on staff 🧑‍🏫",
-            "1:1 meetings begin in Grade 10; regular sessions from Grade 11; full application support in Grade 12 ✍️",
-            "Students are regularly admitted to top 20 US universities and Ivy League schools every year 🥇"
-          ]}
-        ]
-      },
-      {
-        id: "campus", num: "04",
-        title: "🎨 Campus Life & Clubs", subtitle: "Campus Life & Clubs",
-        blocks: [
-          { type: "h3", content: "🕒 Daily Schedule" },
-          { type: "cards", items: [
-            { icon: "⏰", title: "Class Hours", body: "8:00 AM – 3:00 PM, 5-min passing periods" },
-            { icon: "🍽️", title: "Lunch", body: "50 minutes, daily rotating menu" },
-            { icon: "🥗", title: "Dining Options", body: "International food days, vegetarian/gluten-free options" }
-          ]},
-          { type: "h3", content: "🎭 Arts & Activities" },
-          { type: "p", content: "Student-athletes are encouraged to also participate in theater, band, and other arts — sports and arts don't conflict at Berwick 🎵⚽." },
-          { type: "h3", content: "🧩 Official Clubs" },
-          { type: "h4", content: "📝 Academic" },
-          { type: "p", content: "Math Team, Science Olympiad, Debate, Speech, Academic Bowl, Coding, Writing, History, Robotics 🤖" },
-          { type: "h4", content: "🎨 Arts" },
-          { type: "p", content: "Choir, Band, Drama, Dance, Visual Arts, Photography, Crafts, Film, Fashion Design 📸" },
-          { type: "h4", content: "🤝 Service" },
-          { type: "p", content: "Community Service, Volunteer Alliance, Environmental Club, Charity, Animal Welfare, Campus Service, International Aid 🌱" },
-          { type: "h4", content: "🌍 Cultural" },
-          { type: "p", content: "Chinese Cultural Club, European Culture, Multicultural Club, International Students Association, Language Exchange 🗣️" }
-        ]
-      },
-      {
-        id: "athletics", num: "05",
-        title: "⚽ Athletics", subtitle: "Athletics",
-        blocks: [
-          { type: "h4", content: "🐶 Official Brand: Berwick Bulldogs" },
-          { type: "p", content: "Athletics is core to Berwick life. Daily practices after school, with most coaches also serving as classroom teachers — strongly emphasizing balance between academics and sport 📚⚽." },
-          { type: "h3", content: "🏆 Sports Offered" },
-          { type: "h4", content: "🍂 Fall (Sep–Nov)" },
-          { type: "cards", items: [
-            { icon: "⚽", title: "Boys", body: "Soccer, Cross Country, Golf" },
-            { icon: "🏐", title: "Girls", body: "Soccer, Cross Country, Volleyball" },
-            { icon: "📅", title: "Season", body: "September – November" }
-          ]},
-          { type: "h4", content: "⛄ Winter (Dec–Feb)" },
-          { type: "cards", items: [
-            { icon: "🏀", title: "Boys", body: "Basketball, Wrestling" },
-            { icon: "🏊‍♀️", title: "Girls", body: "Basketball, Swimming" },
-            { icon: "📅", title: "Season", body: "December – February" }
-          ]},
-          { type: "h4", content: "🌸 Spring (Mar–May)" },
-          { type: "cards", items: [
-            { icon: "⚾", title: "Boys", body: "Baseball, Tennis, Track & Field" },
-            { icon: "🥎", title: "Girls", body: "Softball, Tennis, Track & Field" },
-            { icon: "📅", title: "Season", body: "March – May" }
-          ]},
-          { type: "quote", text: '"I played soccer, baseball, and tennis — sports helped me build real friendships fast. And teammates use a lot of slang on the field that you simply can\'t learn in the classroom. My English improved so much because of it 📈."', attr: "— Current Chinese boarding student" }
-        ]
-      },
-      {
-        id: "local", num: "06",
-        title: "🏙️ Local Life", subtitle: "Local Life",
-        blocks: [
-          { type: "p", content: "South Berwick is a quiet New England town of ~7,500 residents. The school is about 1 hour north of Boston, with most shopping and dining within a 30-minute drive 🚗." },
-          { type: "h3", content: "🛒 Shopping & Dining" },
-          { type: "cards", items: [
-            { icon: "🛍️", title: "Grocery Stores", body: "Nature's Way Market / Hannaford" },
-            { icon: "🍜", title: "Asian Dining", body: "Chinese, Korean, Japanese restaurants within 30 min" },
-            { icon: "💸", title: "Shopping Tip", body: "New Hampshire has no sales tax" }
-          ]},
-          { type: "h3", content: "📞 Local Services" },
-          { type: "cards", items: [
-            { icon: "🏦", title: "Banking", body: "M&T Bank — can open a local account" },
-            { icon: "📱", title: "Phone Service", body: "Physical SIM or eSIM available" },
-            { icon: "🚗", title: "Transportation", body: "Dedicated dorm vehicle available" }
-          ]},
-          { type: "h3", content: "🎪 Weekend Activities" },
-          { type: "p", content: "The school regularly organizes movies, beach walks, golf, and other weekend activities 🏖️⛳. Annual Boston Red Sox game trip is a student favorite ⚾." }
-        ]
-      },
-      {
-        id: "fees", num: "07",
-        title: "💰 Tuition & Admission", subtitle: "Tuition & Admission",
-        blocks: [
-          { type: "h3", content: "💴 2026–2027 Official Fees" },
-          { type: "cards", items: [
-            { icon: "💵", title: "Tuition", body: "~$50,000/year (MS & US)" },
-            { icon: "🏠", title: "Boarding", body: "$18,500/year (meals included)" },
-            { icon: "🩹", title: "Health Insurance", body: "$1,800/year (mandatory)" },
-            { icon: "🎫", title: "Other Fees", body: "App $150, Enrollment $500, Activities $1,200" }
-          ]},
-          { type: "h3", content: "📋 Admission Requirements" },
-          { type: "h4", content: "📝 Application Steps" },
-          { type: "ol", items: [
-            "Submit online application and application fee",
-            "Submit transcripts, recommendations, and personal essay ✍️",
-            "Campus interview (virtual or in-person 🎥🤝)",
-            "School review and admission decision 📧",
-            "Confirm enrollment, pay deposit, apply for I-20 📄",
-            "Apply for visa and complete enrollment ✅"
-          ]},
-          { type: "h4", content: "🗣️ English Proficiency" },
-          { type: "p", content: "<strong>No standardized test score requirement.</strong> English ability is assessed holistically through the interview, transcripts, and personal essay 🧐." },
-          { type: "h4", content: "💉 Required Vaccinations" },
-          { type: "p", content: "MMR, Varicella, Tdap, Hepatitis B, Influenza, Meningococcal — official documentation required; unvaccinated students cannot enroll 📄." }
-        ]
-      },
-      {
-        id: "visa", num: "08",
-        title: "🆔 Visa & Health Safety", subtitle: "Visa & Health Safety",
-        blocks: [
-          { type: "h3", content: "📄 Visa & Compliance Support" },
-          { type: "p", content: "For all visa-related questions, contact dedicated coordinator <strong>Ms. Gabarro</strong> at mgabarro@berwickacademy.org 📧" },
-          { type: "p", content: "The school has a dedicated staff member handling F-1 student visa matters including SEVIS updates, I-20 maintenance, and travel documentation support 📅." },
-          { type: "h3", content: "🩹 Health Services" },
-          { type: "cards", items: [
-            { icon: "🏥", title: "Health Center", body: "Mon–Fri, 8:00 AM – 6:00 PM" },
-            { icon: "🧠", title: "Counseling", body: "Free 1:1 sessions, Mon–Fri 9–5" },
-            { icon: "🚨", title: "Emergency", body: "24/7 security patrol + one-touch alarm" },
-            { icon: "📞", title: "Emergency Line", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      },
-      {
-        id: "parent", num: "09",
-        title: "📞 Parent Communication", subtitle: "Parent Communication",
-        blocks: [
-          { type: "h3", content: "🤝 Parent-Teacher Conferences" },
-          { type: "ul", items: [
-            "2 parent conferences per academic year — virtual and in-person options 🎥🤝",
-            "Special senior spring conference focused on college counseling 🎓"
-          ]},
-          { type: "h3", content: "🔐 Parent Portal" },
-          { type: "p", content: "Real-time access to grades, attendance, assignments, announcements, and payment history 📊📈." },
-          { type: "h3", content: "📢 Notification System" },
-          { type: "p", content: "Three-channel alerts via email, text, and parent app — covering events, holidays, emergencies, and academic updates 📧📱." },
-          { type: "h3", content: "🌍 International Parent Services" },
-          { type: "p", content: "Campus tour guidance, boarding consultation, local life orientation 🗺️. Dedicated international family coordinator available throughout 🧑‍🏫." }
-        ]
-      },
-      {
-        id: "ending", num: "10",
-        title: "📎 Final Words & Appendix", subtitle: "Final Words & Appendix",
-        blocks: [
-          { type: "p", content: "Welcome to Berwick Academy 🎉. This school, with over 200 years of history, will give you not only an excellent academic education, but a warm and growth-filled boarding experience 💛." },
-          { type: "p", content: "The international student office, dorm parents, teachers, and upperclassmen are all here for you whenever you need help 🤝. We hope your time at Berwick is filled with academic growth, genuine friendships, and a broader view of the world 💪!" },
-          { type: "quote", text: '"This place isn\'t perfect, but it will give you growth you never expected 📈. Be brave — try new things, connect with people, embrace new experiences. You\'ll love it here 💖."', attr: "— All current international boarding students" },
-          { type: "divider" },
-          { type: "h3", content: "📎 Emergency Contacts" },
-          { type: "cards", items: [
-            { icon: "📞", title: "Main Line", body: "+1 (207) 384-2164" },
-            { icon: "📧", title: "International Office", body: "international@berwickacademy.org" },
-            { icon: "👩‍💼", title: "Coordinator", body: "Ms. Gabarro, mgabarro@berwickacademy.org" },
-            { icon: "🚨", title: "24h Emergency", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      }
-    ]
-  },
-  ja: {
-    meta: { lang: "ja", font: '"Noto Sans JP", sans-serif', flag: "🇯🇵", label: "日本語" },
-    cover: {
-      badge: "🏫 Berwick Academy · サウスバーウィック、メイン州",
-      title: "📚 留学生ハンドブック",
-      subtitle: "International Student Handbook",
-      author: "公式情報はBerwick Academy公式サイトより\n✍️ 現役寄宿留学生共同執筆"
-    },
-    toc: { label: "📖 目次" },
-    switchLang: "🔄 言語を切り替える",
-    footer: {
-      title: "Berwick Academy · グローバルブリッジプロジェクト 🌉",
-      lines: ["公式情報はBerwick Academy公式サイトより", "学生体験は現役寄宿留学生が執筆", "創立1791年 · メイン州サウスバーウィック"]
-    },
-    sections: [
-      {
-        id: "advantage", num: "00",
-        title: "🏫 学校概要とBerwickアドバンテージ", subtitle: "The Berwick Advantage",
-        blocks: [
-          { type: "p", content: "Berwick Academyは1791年創立、John Hancockが使命に署名したニューイングランド地区最古の私立大学予備校の一つです。「美徳と実用的知識」を理念に、200年以上にわたり質の高いエリート教育を維持しています 🎓。" },
-          { type: "h3", content: "📊 学校公式データ" },
-          { type: "cards", items: [
-            { icon: "📅", title: "創立年", body: "1791年" },
-            { icon: "🏞️", title: "キャンパス面積", body: "80エーカー" },
-            { icon: "👥", title: "総生徒数", body: "520名（Pre-K〜12年生）" },
-            { icon: "📊", title: "師生比", body: "8:1" },
-            { icon: "🌍", title: "留学生比率", body: "約5%" },
-            { icon: "📍", title: "立地", body: "ボストンから北へ約1時間" }
-          ]}
-        ]
-      },
-      {
-        id: "dorm", num: "01",
-        title: "🏠 寮生活", subtitle: "Dorm Life",
-        blocks: [
-          { type: "p", content: "高校寄宿生専用の独立した住宅型寮を提供。Hilltopキャンパス生活の核心です 🏡。" },
-          { type: "h3", content: "🛏️ 設備" },
-          { type: "cards", items: [
-            { icon: "🛏️", title: "部屋構成", body: "2階建て独立棟、6部屋（個室/2人/3人部屋）、専用バスルーム" },
-            { icon: "🍳", title: "キッチン", body: "冷蔵庫・電子レンジ・調理器具・食洗機完備" },
-            { icon: "🎮", title: "共用エリア", body: "無料ランドリー、TV+PS5ラウンジ" },
-            { icon: "📱", title: "電子機器", body: "使用制限なし" }
-          ]},
-          { type: "h3", content: "📋 ルール" },
-          { type: "ul", items: [
-            "夕食：毎晩18:00に食堂から配膳、全員で前室にて食事 🍽️",
-            "消灯：平日23:00、週末は比較的ゆるやか ⏰",
-            "デリバリー：宅配・フード配達OK 📦🍕",
-            "来客：事前申請・承認が必要 🚪",
-            "清掃：共用エリアを全員で持ち回り 🧹"
-          ]},
-          { type: "quote", text: '"初めての寮生活で最初は戸惑いました。でも一緒にPS5をしたりスポーツをしたりするうちに自然と溶け込めました。意見が違っても直接言い合えて、みんなが寄り添ってくれる環境でした 💛。"', attr: "— 現役中国人寄宿生" }
-        ]
-      },
-      {
-        id: "academics", num: "02",
-        title: "📝 学業と大学進学指導", subtitle: "Academics & Counseling",
-        blocks: [
-          { type: "h3", content: "📖 カリキュラム" },
-          { type: "ul", items: [
-            "<strong>Pinnacle Courses</strong>：実社会の問題に取り組む高校特別上級コース 🚀",
-            "<strong>Fabrication Studio</strong>：問題解決力と実践的創造力を培うメイカースペース 🛠️",
-            "APコースなし — AP同等難度の高度荣誉コースを提供 🎯",
-            "ESLサポートなし — 全授業が完全英語環境 🗣️"
-          ]},
-          { type: "h3", content: "🎓 卒業単位要件" },
-          { type: "cards", items: [
-            { icon: "📚", title: "総単位数", body: "22単位以上" },
-            { icon: "📖", title: "英語", body: "4単位" },
-            { icon: "🧮", title: "数学", body: "3単位" },
-            { icon: "🔬", title: "理科", body: "3単位" },
-            { icon: "🏛️", title: "社会科学", body: "3単位" },
-            { icon: "🗣️", title: "第2外国語", body: "2単位" },
-            { icon: "🎨", title: "芸術", body: "2単位" },
-            { icon: "🏃", title: "健康・体育", body: "1単位" }
-          ]}
-        ]
-      },
-      {
-        id: "fees", num: "03",
-        title: "💰 学費と入学要件", subtitle: "Tuition & Admission",
-        blocks: [
-          { type: "h3", content: "💴 2026-2027年度公式費用" },
-          { type: "cards", items: [
-            { icon: "💵", title: "授業料", body: "約$50,000/年" },
-            { icon: "🏠", title: "寮費", body: "$18,500/年（3食込み）" },
-            { icon: "🩹", title: "保険料", body: "$1,800/年（必須）" },
-            { icon: "🎫", title: "その他費用", body: "出願料$150、登録料$500、活動費$1,200" }
-          ]},
-          { type: "h3", content: "📋 入学要件" },
-          { type: "h4", content: "📝 出願プロセス" },
-          { type: "ol", items: [
-            "オンライン出願フォームと出願料を提出",
-            "成績証明書・推薦状・志望動機を提出 ✍️",
-            "面接（オンライン/対面 🎥🤝）",
-            "学校審査・合否通知 📧",
-            "入学確定・保証金支払い・I-20申請 📄",
-            "ビザ申請・入学登録完了 ✅"
-          ]}
-        ]
-      },
-      {
-        id: "visa", num: "04",
-        title: "🆔 ビザと健康安全", subtitle: "Visa & Health Safety",
-        blocks: [
-          { type: "h3", content: "📄 ビザ・コンプライアンスサポート" },
-          { type: "p", content: "在学中のあらゆる問題は専任コーディネーター <strong>Ms. Gabarro</strong> へ。Email：mgabarro@berwickacademy.org 📧" },
-          { type: "h3", content: "🩹 健康サービス" },
-          { type: "cards", items: [
-            { icon: "🏥", title: "ヘルスセンター", body: "月〜金 8:00〜18:00" },
-            { icon: "🧠", title: "カウンセリング", body: "無料1対1、月〜金 9:00〜17:00" },
-            { icon: "🚨", title: "緊急対応", body: "24時間警備＋ワンタッチ警報" },
-            { icon: "📞", title: "緊急ホットライン", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      },
-      {
-        id: "ending", num: "05",
-        title: "📎 おわりに・付録", subtitle: "Final Words & Appendix",
-        blocks: [
-          { type: "p", content: "Berwick Academyへようこそ 🎉。200年以上の歴史を持つこの学校は、質の高い学業教育だけでなく、温かく成長に満ちた留学生活を提供してくれます 💛。" },
-          { type: "quote", text: '"ここは完璧な場所ではありませんが、想像以上の成長を与えてくれる場所です 📈。少し勇気を出して新しいことに挑戦し、交流し、体験してみてください。きっとここを好きになれます 💖。"', attr: "— 現役留学寄宿生一同" },
-          { type: "divider" },
-          { type: "h3", content: "📎 緊急連絡先" },
-          { type: "cards", items: [
-            { icon: "📞", title: "学校代表電話", body: "+1 (207) 384-2164" },
-            { icon: "📧", title: "留学生オフィス", body: "international@berwickacademy.org" },
-            { icon: "👩‍💼", title: "専任担当者", body: "Ms. Gabarro, mgabarro@berwickacademy.org" },
-            { icon: "🚨", title: "24h緊急ホットライン", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      }
-    ]
-  },
-  ko: {
-    meta: { lang: "ko", font: '"Noto Sans KR", sans-serif', flag: "🇰🇷", label: "한국어" },
-    cover: {
-      badge: "🏫 Berwick Academy · 사우스버윅, 메인주",
-      title: "📚 국제학생 생활 핸드북",
-      subtitle: "International Student Handbook",
-      author: "공식 정보 출처: Berwick Academy 공식 홈페이지\n✍️ 현 기숙사 국제학생 공동 집필"
-    },
-    toc: { label: "📖 목차" },
-    switchLang: "🔄 언어 전환",
-    footer: {
-      title: "Berwick Academy · 글로벌 브릿지 프로젝트 🌉",
-      lines: ["공식 정보는 Berwick Academy 홈페이지에서 발췌", "학생 경험 내용은 현 기숙사 국제학생들이 집필", "설립 1791년 · 메인주 사우스버윅"]
-    },
-    sections: [
-      {
-        id: "advantage", num: "00",
-        title: "🏫 학교 개요 및 베릭 어드밴티지", subtitle: "The Berwick Advantage",
-        blocks: [
-          { type: "p", content: "Berwick Academy는 1791년 John Hancock이 설립 사명에 서명한 뉴잉글랜드 지역의 유서 깊은 사립 대학 예비학교로, '미덕과 실용적 지식'을 이념으로 200년 이상 고품질 엘리트 교육을 유지해 왔습니다 🎓." },
-          { type: "h3", content: "📊 학교 공식 핵심 데이터" },
-          { type: "cards", items: [
-            { icon: "📅", title: "설립 연도", body: "1791년" },
-            { icon: "🏞️", title: "캠퍼스 규모", body: "80에이커" },
-            { icon: "👥", title: "총 학생 수", body: "520명 (Pre-K~12학년)" },
-            { icon: "📊", title: "교사 대 학생 비율", body: "8:1" },
-            { icon: "🌍", title: "국제학생 비율", body: "약 5%" },
-            { icon: "📍", title: "위치", body: "보스턴에서 북쪽으로 약 1시간" }
-          ]}
-        ]
-      },
-      {
-        id: "dorm", num: "01",
-        title: "🏠 기숙사 생활", subtitle: "Dorm Life",
-        blocks: [
-          { type: "p", content: "Berwick Academy는 고등학교 기숙학생을 위한 전용 독립 주택형 기숙사를 제공합니다 🏡." },
-          { type: "h3", content: "🛏️ 시설" },
-          { type: "cards", items: [
-            { icon: "🛏️", title: "방 구성", body: "2층 독립 건물, 6개 방(1~3인실), 전용 욕실" },
-            { icon: "🍳", title: "주방", body: "냉장고·전자레인지·조리도구·식기세척기 완비" },
-            { icon: "🎮", title: "공용 공간", body: "무료 세탁실, TV+PS5 라운지" },
-            { icon: "📱", title: "전자기기", body: "사용 제한 없음" }
-          ]},
-          { type: "h3", content: "📋 생활 규칙" },
-          { type: "ul", items: [
-            "식사: 매일 저녁 18:00 학교 식당에서 기숙사로 배달, 전원이 함께 식사 🍽️",
-            "취침: 평일 23:00 소등, 주말은 비교적 여유 있음 ⏰",
-            "배달: 음식 배달 및 택배 허용 📦🍕",
-            "방문객: 사전 신청 및 승인 필요 🚪",
-            "청소: 전체 기숙생이 공용 구역 청소 순번제 🧹"
-          ]},
-          { type: "quote", text: '"처음 기숙사 생활은 낯설었지만, 함께 PS5를 하고 운동을 하면서 자연스럽게 어울리게 됐어요. 의견이 달라도 솔직하게 얘기하면 룸메이트들이 다 배려해줬어요. 모두 정말 친절했어요 💛."', attr: "— 현 중국인 기숙학생" }
-        ]
-      },
-      {
-        id: "fees", num: "02",
-        title: "💰 학비와 입학 요건", subtitle: "Tuition & Admission",
-        blocks: [
-          { type: "h3", content: "💴 2026-2027학년도 공식 비용" },
-          { type: "cards", items: [
-            { icon: "💵", title: "수업료", body: "약 $50,000/년" },
-            { icon: "🏠", title: "기숙사비", body: "$18,500/년 (3식 포함)" },
-            { icon: "🩹", title: "보험료", body: "$1,800/년 (필수)" },
-            { icon: "🎫", title: "기타 비용", body: "지원비 $150, 등록비 $500, 활동비 $1,200" }
-          ]},
-          { type: "h3", content: "📋 입학 요건" },
-          { type: "h4", content: "📝 지원 프로세스" },
-          { type: "ol", items: [
-            "온라인 원서 및 원서 접수비 제출",
-            "재학 성적 증명서, 추천서, 개인 지원 에세이 제출 ✍️",
-            "캠퍼스 인터뷰 (온라인/대면 🎥🤝)",
-            "학교 종합 심사 후 합격 결과 통지 📧",
-            "입학 확정, 입학 보증금 납부, I-20 신청 📄",
-            "비자 신청, 입학 등록 절차 완료 ✅"
-          ]}
-        ]
-      },
-      {
-        id: "visa", num: "03",
-        title: "🆔 비자와 건강 안전", subtitle: "Visa & Health Safety",
-        blocks: [
-          { type: "h3", content: "📄 비자 및 컴플라이언스 지원" },
-          { type: "p", content: "재학 중 모든 관련 문제는 전담 코디네이터 <strong>Ms. Gabarro</strong>에게 문의하세요. 이메일：mgabarro@berwickacademy.org 📧" },
-          { type: "h3", content: "🩹 건강 안전 서비스" },
-          { type: "cards", items: [
-            { icon: "🏥", title: "헬스 센터", body: "월~금 8:00~18:00" },
-            { icon: "🧠", title: "심리 상담", body: "무료 1:1, 월~금 9:00~17:00" },
-            { icon: "🚨", title: "긴급 대응", body: "24시간 경비 순찰+원터치 알람" },
-            { icon: "📞", title: "긴급 핫라인", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      },
-      {
-        id: "ending", num: "04",
-        title: "📎 마무리와 부록", subtitle: "Final Words & Appendix",
-        blocks: [
-          { type: "p", content: "Berwick Academy에 오신 것을 환영합니다 🎉! 200년 이상의 역사를 가진 본교는 고품질의 학업 교육을 제공할 뿐만 아니라, 따뜻하고 성장으로 가득한 유학 생활을 선사할 것입니다 💛." },
-          { type: "quote", text: '"이곳이 완벽한 장소는 아니지만, 여러분이 상상도 못한 만큼의 성장을 반드시 선사해 줄 곳입니다 📈. 조금만 용기를 내어 새로운 것에 도전하고, 사람들과 교류하고, 다양한 경험을 쌓아보세요. 분명 이곳을 사랑하게 될 거예요 💖."', attr: "— 현 재학 중인 모든 국제 기숙사 학생 일동" },
-          { type: "divider" },
-          { type: "h3", content: "📎 긴급 연락처 목록" },
-          { type: "cards", items: [
-            { icon: "📞", title: "학교 대표 전화", body: "+1 (207) 384-2164" },
-            { icon: "📧", title: "국제학생 사무실", body: "international@berwickacademy.org" },
-            { icon: "👩‍💼", title: "전담 담당자", body: "Ms. Gabarro, mgabarro@berwickacademy.org" },
-            { icon: "🚨", title: "24시간 긴급 핫라인", body: "+1 (207) 384-2169" }
-          ]}
-        ]
-      }
-    ]
-  }
-};
-
-// ============================================================
-// 🧩 REUSABLE COMPONENTS
-// ============================================================
-const { useState, useEffect, useRef } = React;
-
-function CardGrid({ items }) {
-  return (
-    <div className="card-grid">
-      {items.map((card, i) => (
-        <div key={i} className="card">
-          <div className="card-icon">{card.icon}</div>
-          <div className="card-title">{card.title}</div>
-          <div className="card-body">{card.body}</div>
-        </div>
-      ))}
+<!-- 语言选择首页 -->
+<div id="language-selector">
+  <div class="selector-badge">🏫 Berwick Academy · South Berwick, Maine</div>
+  <h1 class="selector-title">📚 International Student<br>Handbook</h1>
+  <p class="selector-subtitle">请选择您的语言 / Please select your language</p>
+  <div class="lang-buttons">
+    <a href="#lang-zh" class="lang-btn">🇨🇳 中文</a>
+    <a href="#lang-en" class="lang-btn">🇺🇸 English</a>
+    <a href="#lang-ja" class="lang-btn">🇯🇵 日本語</a>
+    <a href="#lang-ko" class="lang-btn">🇰🇷 한국어</a>
+  </div>
+  <div class="selector-divider"></div>
+  <p class="selector-author">✍️ Official Info from Berwick Academy | Written by Current Boarding Students</p>
+</div>
+<!-- 中文完整版手册【全目录超链接跳转 | 新增Emoji优化】 -->
+<div class="lang-container" id="lang-zh">
+  <!-- 封面 -->
+  <div class="cover">
+    <div class="cover-badge">🏫 Berwick Academy · South Berwick, Maine</div>
+    <h1 class="cover-title">📚 国际生生活手册</h1>
+    <p class="cover-subtitle">International Student Handbook</p>
+    <div class="cover-divider"></div>
+    <p class="cover-author">官方信息源自Berwick Academy官网<br>✍️ 现任住校国际生联合撰写</p>
+  </div>
+  <!-- 目录【全标题超链接跳转 | 新增Emoji】 -->
+  <div class="toc">
+    <div class="toc-inner">
+      <div class="toc-label">📖 目录</div>
+      <div class="toc-items">
+        <a href="#zh-advantage" class="toc-item"><span class="toc-num">00</span><div><div class="toc-text">🏫 官方办学承诺与学校概况</div><div class="toc-en">The Berwick Advantage</div></div></a>
+        <a href="#zh-prearrival" class="toc-item"><span class="toc-num">01</span><div><div class="toc-text">✈️ 新生入学前必读</div><div class="toc-en">Pre-Arrival Guide</div></div></a>
+        <a href="#zh-dorm" class="toc-item"><span class="toc-num">02</span><div><div class="toc-text">🏠 宿舍生活</div><div class="toc-en">Dorm Life</div></div></a>
+        <a href="#zh-academics" class="toc-item"><span class="toc-num">03</span><div><div class="toc-text">📝 学术与升学指导</div><div class="toc-en">Academics & Counseling</div></div></a>
+        <a href="#zh-campus" class="toc-item"><span class="toc-num">04</span><div><div class="toc-text">🎨 校园日常与社团活动</div><div class="toc-en">Campus Life & Clubs</div></div></a>
+        <a href="#zh-athletics" class="toc-item"><span class="toc-num">05</span><div><div class="toc-text">⚽ 校队与体育</div><div class="toc-en">Athletics</div></div></a>
+        <a href="#zh-local" class="toc-item"><span class="toc-num">06</span><div><div class="toc-text">🏙️ 周边生活</div><div class="toc-en">Local Life</div></div></a>
+        <a href="#zh-fees" class="toc-item"><span class="toc-num">07</span><div><div class="toc-text">💰 学费与入学要求</div><div class="toc-en">Tuition & Admission</div></div></a>
+        <a href="#zh-visa" class="toc-item"><span class="toc-num">08</span><div><div class="toc-text">🆔 签证与健康安全</div><div class="toc-en">Visa & Health Safety</div></div></a>
+        <a href="#zh-parent" class="toc-item"><span class="toc-num">09</span><div><div class="toc-text">📞 家长沟通渠道</div><div class="toc-en">Parent Communication</div></div></a>
+        <a href="#zh-ending" class="toc-item"><span class="toc-num">10</span><div><div class="toc-text">📎 结语与附录</div><div class="toc-en">Final & Appendix</div></div></a>
+      </div>
     </div>
-  );
-}
-
-function StudentQuote({ text, attr }) {
-  return (
-    <div className="student-quote">
-      <div className="quote-text">{text}</div>
-      <div className="quote-attr">{attr}</div>
+  </div>
+  <!-- 00 官方办学承诺与学校概况 -->
+  <div id="zh-advantage" class="section">
+    <div class="section-header"><div class="section-num">00</div><div class="section-titles"><h2>🏫 官方办学承诺与学校概况</h2><div class="section-subtitle">The Berwick Advantage</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academy建校于1791年，由John Hancock签署建校使命，秉承“美德与实用知识”的办学理念，是美国新英格兰地区历史悠久的私立大学预科学校，历经两百余年发展，始终坚持高品质的精英教育 🎓。</p>
     </div>
-  );
-}
-
-function ContentBlock({ block }) {
-  switch (block.type) {
-    case "p":
-      return <div className="content-block"><p dangerouslySetInnerHTML={{ __html: block.content }} /></div>;
-    case "h3":
-      return <div className="content-block"><h3 dangerouslySetInnerHTML={{ __html: block.content }} /></div>;
-    case "h4":
-      return <div className="content-block"><h4 dangerouslySetInnerHTML={{ __html: block.content }} /></div>;
-    case "ul":
-      return (
-        <div className="content-block">
-          <ul>{block.items.map((item, i) => <li key={i} dangerouslySetInnerHTML={{ __html: item }} />)}</ul>
+    <div class="content-block">
+      <h3>👨🏫 学校教师团队5项核心承诺</h3>
+      <ol>
+        <li>规模足以提供丰富的课程选择，同时小到可以为你定制个性化的学习体验</li>
+        <li>助力你在复杂多变的世界中，找到属于自己的成功与人生目标</li>
+        <li>赋能你在学术上超越自我预期，为大学申请做好全面准备</li>
+        <li>以健康的竞技挑战你，让你在体育与艺术领域绽放光彩</li>
+        <li>以丰富的实践机会拓宽你的视野，助力你追求卓越，释放独一无二的个人潜能</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📊 学校官方核心数据</h3>
+      <!-- 适配参考图的卡片式布局，带Emoji -->
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">建校时间</div>
+          <div class="card-body">1791年</div>
         </div>
-      );
-    case "ol":
-      return (
-        <div className="content-block">
-          <ol>{block.items.map((item, i) => <li key={i} dangerouslySetInnerHTML={{ __html: item }} />)}</ol>
+        <div class="card">
+          <div class="card-icon">🏞️</div>
+          <div class="card-title">校园规模</div>
+          <div class="card-body">80英亩</div>
         </div>
-      );
-    case "cards":
-      return <div className="content-block"><CardGrid items={block.items} /></div>;
-    case "quote":
-      return <StudentQuote text={block.text} attr={block.attr} />;
-    case "divider":
-      return <div className="section-divider" />;
-    default:
-      return null;
-  }
-}
-
-function Section({ section }) {
-  return (
-    <div id={section.id} className="section">
-      <div className="section-header">
-        <div className="section-num">{section.num}</div>
-        <div className="section-titles">
-          <h2>{section.title}</h2>
-          <div className="section-subtitle-text">{section.subtitle}</div>
+        <div class="card">
+          <div class="card-icon">👥</div>
+          <div class="card-title">总招生人数</div>
+          <div class="card-body">520人（Pre-K至12年级）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">师生比</div>
+          <div class="card-body">8:1 精英小班</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <div class="card-title">国际生比例</div>
+          <div class="card-body">约5%</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <div class="card-title">地理位置</div>
+          <div class="card-body">波士顿以北约1小时车程</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">生源覆盖</div>
+          <div class="card-body">全美85个社区，25条巴士线路</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💴</div>
+          <div class="card-title">助学金覆盖</div>
+          <div class="card-body">41%在校生获经济资助</div>
         </div>
       </div>
-      {section.blocks.map((block, i) => <ContentBlock key={i} block={block} />)}
     </div>
-  );
-}
-
-// ============================================================
-// 📱 MAIN APP
-// ============================================================
-function App() {
-  const [activeLang, setActiveLang] = useState(null);
-  const topRef = useRef(null);
-
-  const languages = [
-    { code: "zh", flag: "🇨🇳", label: "中文" },
-    { code: "en", flag: "🇺🇸", label: "English" },
-    { code: "ja", flag: "🇯🇵", label: "日本語" },
-    { code: "ko", flag: "🇰🇷", label: "한국어" }
-  ];
-
-  const selectLang = (code) => {
-    setActiveLang(code);
-    // Update html lang attribute for accessibility
-    document.documentElement.lang = code;
-    // Update font
-    document.body.style.fontFamily = TRANSLATIONS[code].meta.font;
-    window.scrollTo(0, 0);
-  };
-
-  const backToSelector = () => {
-    setActiveLang(null);
-    document.documentElement.lang = "zh";
-    document.body.style.fontFamily = '"Noto Sans SC", sans-serif';
-    window.scrollTo(0, 0);
-  };
-
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
-  // Language Selector
-  if (!activeLang) {
-    return (
-      <div className="lang-selector" ref={topRef}>
-        <div className="selector-badge">🏫 Berwick Academy · South Berwick, Maine</div>
-        <h1 className="selector-title">📚 International Student<br />Handbook</h1>
-        <p className="selector-subtitle">请选择您的语言 / Please select your language</p>
-        <div className="lang-buttons">
-          {languages.map(l => (
-            <button key={l.code} className="lang-btn" onClick={() => selectLang(l.code)}>
-              {l.flag} {l.label}
-            </button>
-          ))}
+  </div>
+  <!-- 01 新生入学前必读 -->
+  <div id="zh-prearrival" class="section">
+    <div class="section-header"><div class="section-num">01</div><div class="section-titles"><h2>✈️ 新生入学前必读</h2><div class="section-subtitle">Pre-Arrival Guide</div></div></div>
+    <div class="content-block">
+      <p>本章节为国际生赴美入校前的核心准备指南，结合学校官方规则与在校生真实经验，帮你避坑少走弯路 🚫❌。</p>
+    </div>
+    <div class="content-block">
+      <h3>🛬 一、落地与到校交通</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">✈️</div>
+          <div class="card-title">推荐机场</div>
+          <div class="card-body">波士顿洛根国际机场 (BOS)</div>
         </div>
-        <div className="selector-divider"></div>
-        <p className="selector-author">✍️ Official Info from Berwick Academy | Written by Current Boarding Students</p>
-      </div>
-    );
-  }
-
-  const data = TRANSLATIONS[activeLang];
-
-  return (
-    <div>
-      {/* Cover */}
-      <div className="cover">
-        <div className="cover-badge">{data.cover.badge}</div>
-        <h1 className="cover-title">{data.cover.title}</h1>
-        <p className="cover-subtitle">{data.cover.subtitle}</p>
-        <div className="cover-divider"></div>
-        <p className="cover-author" style={{ whiteSpace: "pre-line" }}>{data.cover.author}</p>
-      </div>
-
-      {/* Table of Contents */}
-      <div className="toc">
-        <div className="toc-inner">
-          <div className="toc-label">{data.toc.label}</div>
-          <div className="toc-items">
-            {data.sections.map(s => (
-              <button key={s.id} className="toc-item" onClick={() => scrollToSection(s.id)}>
-                <span className="toc-num">{s.num}</span>
-                <div>
-                  <div className="toc-text">{s.title}</div>
-                  <div className="toc-en">{s.subtitle}</div>
-                </div>
-              </button>
-            ))}
-          </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">推荐交通</div>
+          <div class="card-body">C&J巴士直达Dover/Portsmouth</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">入住截止</div>
+          <div class="card-body">开学前1天</div>
         </div>
       </div>
-
-      {/* Sections */}
-      {data.sections.map(s => <Section key={s.id} section={s} />)}
-
-      {/* Footer */}
-      <footer>
-        <p className="gold">{data.footer.title}</p>
-        {data.footer.lines.map((line, i) => <p key={i}>{line}</p>)}
-        <button className="switch-lang-btn" onClick={backToSelector}>{data.switchLang}</button>
-      </footer>
     </div>
-  );
-}
+    <div class="content-block">
+      <h3>🎒 二、必带物品清单</h3>
+      <ol>
+        <li><strong>生活必需品</strong>：床品（学校仅提供基础床垫，床单/被套/枕套/被子需自备）；非110V电压地区学生，务必携带美标转换插头 🔌</li>
+        <li><strong>个人物品</strong>：可带家乡调料/零食缓解思乡之情 🥘🍬；有常用药者，需附带英文说明书及有效处方单 💊</li>
+        <li><strong>重要文件</strong>：I-20原件、疫苗证明、录取通知书、护照及签证复印件等核心文件，务必放入随身行李，切勿托运 📄</li>
+      </ol>
+    </div>
+  </div>
+  <!-- 02 宿舍生活 -->
+  <div id="zh-dorm" class="section">
+    <div class="section-header"><div class="section-num">02</div><div class="section-titles"><h2>🏠 宿舍生活</h2><div class="section-subtitle">Dorm Life</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academy为高中寄宿生提供专属独栋住宅式宿舍，是本校Hilltop校园生活的核心组成部分 🏡。</p>
+    </div>
+    <div class="content-block">
+      <h3>🛏️ 一、房间与配套设施</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛏️</div>
+          <div class="card-title">房间配置</div>
+          <div class="card-body">2层独栋，6间房（单/双/三人间），独立卫浴</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍳</div>
+          <div class="card-title">厨房设施</div>
+          <div class="card-body">全配冰箱/微波炉/厨具/洗碗机</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">公共区域</div>
+          <div class="card-body">免费洗衣房、TV+PS5客厅</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">电子设备</div>
+          <div class="card-body">无使用限制</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🔢 二、房间分配规则</h3>
+      <p>房间采用<strong>住宿资历优先级选房制</strong>：按学生在校住宿年限排序，住宿时间越长，选房优先级越高；支持国际生与本地生申请同住 🤝。</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 三、日常管理与规则</h3>
+      <ul>
+        <li>餐饮安排：每晚18:00由学校食堂统一配餐至宿舍，全体住宿生在前厅共同用餐 🍽️</li>
+        <li>作息要求：工作日晚23:00熄灯，仅可进行不打扰他人的安静活动；周末宵禁规则较工作日更为宽松 ⏰</li>
+        <li>外卖与快递：宿舍支持外卖、快递正常配送 📦🍕</li>
+        <li>访客管理：如需带校外朋友/访客进入宿舍，须提前提交正式申请，审批通过后方可带入 🚪</li>
+        <li>公共管理：全体住宿生轮流承担公共区域清洁杂务，共同维护生活环境 🧹</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>👨👩👧👦 四、舍监与安全保障</h3>
+      <ul>
+        <li>宿舍共配备5位舍监（Dorm Parents），其中3位与学生同住宿舍楼，其余2-3位居住在学校周边；舍监风格各异，但均以学生安全与需求为核心，遇到任何问题均可第一时间寻求帮助 🆘</li>
+        <li>外出管理：每次离开宿舍均需在学校网页系统完成外出登记，家长与老师可实时查看学生去向记录，全方位保障学生安全 📍</li>
+        <li>健康支持：学校设有健康中心处理常见疾病，专业训练师办公室处理运动损伤；若情况严重，舍监会第一时间陪同学生前往医院就诊 🏥</li>
+        <li>官方健康支持体系：学校设有Student Wellness Advisory Team (SWAT) 学生健康咨询团队，为学生提供全方位的健康与心理支持 🧠</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"我是第一次住宿舍，刚开始真的很不适应——有室友、有固定的晚餐时间，一切都是陌生的。但当我们开始一起打PS5、一起参加运动，我突然就融入了。有不同的想法直接说出来，室友都愿意互相迁就，大家其实都特别友善 💛。"</div>
+      <div class="quote-attr">— 现任中国住校生</div>
+    </div>
+  </div>
+  <!-- 03 学术与升学指导 -->
+  <div id="zh-academics" class="section">
+    <div class="section-header"><div class="section-num">03</div><div class="section-titles"><h2>📝 学术与升学指导</h2><div class="section-subtitle">Academics & Counseling</div></div></div>
+    <div class="content-block">
+      <h4>📚 官方培养体系：Pathway of a Learner</h4>
+      <p>在Berwick Academy，学习不是一张清单，而是一段完整的成长旅程。学校以「美德与实用知识」为核心，打造了从Pre-K到12年级的Pathway of a Learner培养体系，分Lower School（小学）、Middle School（初中）、Upper School（高中）三个阶段，全程培养学生的好奇心、自信心与品格 🧠💪。</p>
+    </div>
+    <div class="content-block">
+      <h3>📖 一、课程与选课指南</h3>
+      <ul>
+        <li><strong>官方特色课程-Pinnacle Courses</strong>：高中部专属高阶课程，引导学生解决真实世界的问题与想法，以有意义的方式应用所学知识，是学校学术体系的核心特色 🚀</li>
+        <li><strong>创新工坊-Fabrication Studio</strong>：学校专属制造工坊，培养高中生的问题解决能力与实践创新能力 🛠️</li>
+        <li>课程体系：学校<strong>不提供AP课程</strong>，但开设与AP课程同等学术难度的高阶荣誉课程，满足顶尖大学预科的学术要求，助力学生升学发展 🎯</li>
+        <li>语言支持：学校不提供ESL语言辅导课程，所有课程均为全英文授课环境，学校将通过面试、在校学业表现等维度综合评估学生的语言适配能力 🗣️</li>
+        <li>第一年必修课程：英语、数学、第二外语、历史4门核心课程为新生第一年必修 📚</li>
+        <li>选课建议：推荐新生第一年搭配美术类等学术压力较小的课程，平稳适应美国高中的学术节奏 🎨</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🏆 二、荣誉课程列表</h3>
+      <p>荣誉英语、荣誉数学、荣誉生物、荣誉化学、荣誉历史、荣誉外语系列课程、Pinnacle高阶特色课程</p>
+    </div>
+    <div class="content-block">
+      <h3>🎓 三、毕业学分要求</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">总学分要求</div>
+          <div class="card-body">至少22学分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <div class="card-title">英语</div>
+          <div class="card-body">4学分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧮</div>
+          <div class="card-title">数学</div>
+          <div class="card-body">3学分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔬</div>
+          <div class="card-title">自然科学</div>
+          <div class="card-body">3学分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">社会科学</div>
+          <div class="card-body">3学分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗣️</div>
+          <div class="card-title">第二外语</div>
+          <div class="card-body">2学分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">艺术</div>
+          <div class="card-body">2学分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏃</div>
+          <div class="card-title">健康与体育</div>
+          <div class="card-body">1学分</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📚 四、校园学术资源</h3>
+      <ul>
+        <li>学校图书馆开放时间：<strong>每日8:00-17:00</strong>，提供自习空间、图书借阅、学术资料查询等服务 📖</li>
+        <li>课后辅导：学校提供课后学业辅导支持，学生可按需预约对应学科的辅导服务 📝</li>
+        <li>学生领导力机会：学校提供丰富的学生领导岗位，包括12年级级长（Prefects）、学生健康咨询团队（SWAT）等，助力学生全面发展 🚀</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🎓 五、大学升学指导</h3>
+      <ul>
+        <li>师资配置：学校College Counseling升学指导办公室配备3位专属升学顾问，全程跟进学生升学规划 🧑🏫</li>
+        <li>服务节奏：10年级起与学生建立一对一专属对接，11年级开启常态化升学规划沟通会议，12年级提供大学申请全流程专属指导 ✍️</li>
+        <li>升学成果：学校升学表现优异，每年均有多名学生升入全美前20院校及常春藤联盟（Ivy League）高校；每年有大量学生运动员进入NCAA D1、D2、D3级别大学，继续体育与学术生涯 🥇</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 04 校园日常与社团活动 -->
+  <div id="zh-campus" class="section">
+    <div class="section-header"><div class="section-num">04</div><div class="section-titles"><h2>🎨 校园日常与社团活动</h2><div class="section-subtitle">Campus Life & Clubs</div></div></div>
+    <div class="content-block">
+      <h3>🕒 一、校园日常作息</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⏰</div>
+          <div class="card-title">上课时间</div>
+          <div class="card-body">8:00-15:00，课间5分钟</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍽️</div>
+          <div class="card-title">午餐时间</div>
+          <div class="card-body">50分钟，每日更新菜单</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥗</div>
+          <div class="card-title">餐饮特色</div>
+          <div class="card-body">国际美食日，素食/无麸质选项</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎭 二、官方艺术与活动体系</h3>
+      <p>学校鼓励学生全面发展，学生运动员可同时参与戏剧舞台表演、乐队演奏等艺术项目，体育与艺术发展互不冲突 🎵⚽。</p>
+      <ul>
+        <li>初中部：每年固定举办音乐剧演出，报名热度极高，部分热门角色会由多名学生分场次演绎；拥有丰富的社团活动体系 🎶</li>
+        <li>高中部：每年举办视觉与表演艺术展、私人音乐课汇演、舞蹈团专场演出、戏剧/音乐剧公演等艺术活动 🎨</li>
+        <li>年度传统活动：3年级风筝许愿活动、4年级树屋项目、校园图书展、全校地球日活动、蓝白周/蓝白日、祖父母与特殊朋友日、Berwick创新庆典等 🎪</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🧩 三、官方社团全名单</h3>
+      <h4>📝 学术类社团</h4>
+      <p>数学竞赛社、科学奥林匹克社、辩论社、演讲社、学术碗社、编程社、写作社、历史社、机器人社 🤖</p>
+      <h4>🎨 艺术类社团</h4>
+      <p>合唱团、乐队、戏剧社、舞蹈社、视觉艺术社、摄影社、手工创作社、电影社、时装设计社 📸</p>
+      <h4>🤝 服务类社团</h4>
+      <p>社区服务社、志愿者联盟、环保社、慈善社、动物保护社、校园服务社、国际援助社 🌱</p>
+      <h4>🌍 文化类社团</h4>
+      <p>中国文化社、欧洲文化社、多元文化社、国际生联谊社、语言交流社 🗣️</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 四、社团活动说明</h3>
+      <ol>
+        <li>社团招新：开学后1个月左右，学校将开启为期一周的社团招新活动，所有学生均可自由报名加入 📣</li>
+        <li>特色社团：中国文化社为中国及亚洲国际生提供文化交流、节日庆祝的专属平台，也是新生快速融入校园的优质渠道 🎑；戏剧社每年举办约5场正式舞台演出，无经验门槛，欢迎所有学生报名参与 🎭</li>
+        <li>社区服务：学校无强制社区服务时长要求，学生可根据个人兴趣自愿参与校内外社区服务项目 🧑🤝🧑</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📅 五、学年官方校历</h3>
+      <p>学年官方校历将在录取后由学校官方统一发布，完整包含开学/放假时间、假期安排、考试周、校园重要节点、活动日程等核心信息。新生录取后可通过学校官网、录取通知邮件、学生专属门户实时获取最新版官方校历，提前规划学业与行程。</p>
+    </div>
+  </div>
+  <!-- 05 校队与体育 -->
+  <div id="zh-athletics" class="section">
+    <div class="section-header"><div class="section-num">05</div><div class="section-titles"><h2>⚽ 校队与体育</h2><div class="section-subtitle">Athletics</div></div></div>
+    <div class="content-block">
+      <h4>🐶 官方体育品牌：Berwick Bulldogs</h4>
+      <p>体育是Berwick Academy校园文化的核心组成部分，学校以健康的竞技理念，鼓励学生在体育领域挑战自我、绽放光彩 💪。每日放学后均有固定训练，绝大多数教练同时为学校任课老师，高度重视学生的学业与体育的平衡发展 📚⚽。</p>
+    </div>
+    <div class="content-block">
+      <h3>🏆 一、全量体育项目</h3>
+      <h4>🍂 秋季校队（Varsity/JV）</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚽</div>
+          <div class="card-title">男生项目</div>
+          <div class="card-body">足球、越野、高尔夫</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏐</div>
+          <div class="card-title">女生项目</div>
+          <div class="card-body">足球、越野、排球</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">赛季时间</div>
+          <div class="card-body">9月-11月</div>
+        </div>
+      </div>
+      <h4>⛄ 冬季校队（Varsity/JV）</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏀</div>
+          <div class="card-title">男生项目</div>
+          <div class="card-body">篮球、摔跤</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏊‍♀️</div>
+          <div class="card-title">女生项目</div>
+          <div class="card-body">篮球、游泳</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">赛季时间</div>
+          <div class="card-body">12月-2月</div>
+        </div>
+      </div>
+      <h4>🌸 春季校队（Varsity/JV）</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚾</div>
+          <div class="card-title">男生项目</div>
+          <div class="card-body">棒球、网球、田径</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥎</div>
+          <div class="card-title">女生项目</div>
+          <div class="card-body">垒球、网球、田径</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">赛季时间</div>
+          <div class="card-body">3月-5月</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎉 二、校园体育文化</h3>
+      <ul>
+        <li>官方升学通道：每年均有大量学生运动员升入NCAA D1、D2、D3级别的大学，继续自己的体育与学术生涯，学校为体育特长生提供完整的升学支持 🎓</li>
+        <li>比赛氛围：主场比赛会有大量在校学生到场加油助威，客场比赛常有学生家长自愿为校队提供团队晚餐，氛围浓厚 🧑👩👧👦</li>
+        <li>国际生专属优势：体育是国际学生快速融入校园的最佳渠道之一，运动场上的交流无语言壁垒，同时也是学习地道英语俚语、建立深度友谊的优质场景 🤝</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"我参加了足球、棒球和网球校队，体育让我很快就和队友们建立了最真实的友谊。而且打球的时候大家会用很多俚语，这是在课堂上完全学不到的东西，也让我的英语进步得特别快 📈。"</div>
+      <div class="quote-attr">— 现任中国住校生</div>
+    </div>
+  </div>
+  <!-- 06 周边生活 -->
+  <div id="zh-local" class="section">
+    <div class="section-header"><div class="section-num">06</div><div class="section-titles"><h2>🏙️ 周边生活</h2><div class="section-subtitle">Local Life</div></div></div>
+    <div class="content-block">
+      <p>South Berwick是一座宁静的新英格兰小镇，常住人口约7500人，镇上配套齐全，更丰富的生活资源均集中在车程30分钟以内的范围，学校位于波士顿以北1小时车程，交通便捷 🚗。</p>
+    </div>
+    <div class="content-block">
+      <h3>🛒 一、日常采购与餐饮</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛍️</div>
+          <div class="card-title">日常超市</div>
+          <div class="card-body">Nature's Way Market / Hannaford</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍜</div>
+          <div class="card-title">餐饮选择</div>
+          <div class="card-body">中餐馆、韩料、日料（30分钟车程内）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💸</div>
+          <div class="card-title">购物贴士</div>
+          <div class="card-body">新罕布什尔州无消费税</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📞 二、本地基础服务</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏦</div>
+          <div class="card-title">银行服务</div>
+          <div class="card-body">M&T银行，可开本地账户</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">通讯服务</div>
+          <div class="card-body">实体SIM/eSIM可选</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚗</div>
+          <div class="card-title">出行支持</div>
+          <div class="card-body">宿舍专属车辆接送</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎪 三、周末活动</h3>
+      <p>学校会定期组织观影、沙滩散步、高尔夫等周末集体活动 🏖️⛳；每年固定安排波士顿红袜队（Boston Red Sox）棒球赛观赛之旅，是在校学生年度最受期待的活动之一 ⚾。</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"小镇很安静，但其实一点都不会无聊。车程30分钟以内，华人超市、韩国烧烤、日料店都能找到，周末的活动学校也安排得很丰富。最重要的是，这份安静能让你真正专注在学业和运动上，收获成长 📈。"</div>
+      <div class="quote-attr">— 现任中国住校生</div>
+    </div>
+  </div>
+  <!-- 07 学费与入学要求 -->
+  <div id="zh-fees" class="section">
+    <div class="section-header"><div class="section-num">07</div><div class="section-titles"><h2>💰 学费与入学要求</h2><div class="section-subtitle">Tuition & Admission</div></div></div>
+    <div class="content-block">
+      <h3>💴 一、2026-2027学年官方费用</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">💵</div>
+          <div class="card-title">学费</div>
+          <div class="card-body">约$50,000/年（初高中统一）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏠</div>
+          <div class="card-title">住宿费</div>
+          <div class="card-body">$18,500/年（含三餐）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🩹</div>
+          <div class="card-title">保险费</div>
+          <div class="card-body">$1,800/年（强制）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎫</div>
+          <div class="card-title">其他费用</div>
+          <div class="card-body">申请费$150、注册费$500、活动费$1,200</div>
+        </div>
+      </div>
+      <h4>📋 保险要求</h4>
+      <p>必须购买美国指定校园医疗保险 🩹，海外保险不予认可；该保险全面覆盖全年医疗、急诊、住院服务 🏥。</p>
+      <h4>💳 支付方式</h4>
+      <p>支持电汇、信用卡、线上支付平台，需在开学前30天缴清全部费用，可申请分期缴费（需学校审核）📅。</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 二、国际生官方入学要求</h3>
+      <h4>📝 申请流程</h4>
+      <ol>
+        <li>在线提交申请表及申请费</li>
+        <li>递交在校成绩单、推荐信、个人申请文书 ✍️</li>
+        <li>参加校园面试（线上/线下 🎥🤝）</li>
+        <li>学校综合审核，发放录取结果 📧</li>
+        <li>确认录取，缴纳定金，申请I-20 📄</li>
+        <li>办理签证，完成入学注册手续 ✅</li>
+      </ol>
+      <h4>🗣️ 语言能力评估说明</h4>
+      <p>学校<strong>无硬性标准化语言成绩要求</strong>，将通过面试表现、在校学业成绩单、个人文书等材料，综合评估学生的英语能力与全英文授课环境的适配度 🧐。</p>
+      <h4>💉 疫苗强制要求</h4>
+      <p>需完成美国要求的全套疫苗：麻疹、腮腺炎、风疹、水痘、百白破、乙肝、流感、脑膜炎疫苗，提交官方疫苗证明，未达标者不予入学 📄。</p>
+      <h4>📄 I-20发放规则</h4>
+      <ul>
+        <li>收到录取通知书及定金后，10个工作日内发放I-20 📧</li>
+        <li>需提供资金证明，证明有能力支付学费及生活费 💵</li>
+        <li>仅向符合美国移民局要求的国际学生发放，需完成全部申请流程 ✅</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 08 签证与健康安全 -->
+  <div id="zh-visa" class="section">
+    <div class="section-header"><div class="section-num">08</div><div class="section-titles"><h2>🆔 签证与健康安全</h2><div class="section-subtitle">Visa & Health Safety</div></div></div>
+    <div class="content-block">
+      <h3>📄 一、签证与合规支持</h3>
+      <h4>🌍 国际生专属对接人</h4>
+      <p>国际生在校期间的各类问题，均可联系专属负责人 <strong>Ms. Gabarro</strong>，联系邮箱：mgabarro@berwickacademy.org 📧</p>
+      <h4>🆔 F1签证服务</h4>
+      <p>学校设有专人负责F1学生签证相关事宜，包括SEVIS信息更新、I-20文件维护、假期中出入境文件支持等；SEVIS信息每年暑假统一更新，学校会提前通知学生完成相关流程 📅。</p>
+    </div>
+    <div class="content-block">
+      <h3>🩹 二、健康安全官方服务</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏥</div>
+          <div class="card-title">健康中心</div>
+          <div class="card-body">周一至周五 8:00-18:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <div class="card-title">心理咨询</div>
+          <div class="card-body">免费1对1，周一至周五 9:00-17:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">应急响应</div>
+          <div class="card-body">24小时安保+一键报警系统</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">应急热线</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 09 家长沟通渠道 -->
+  <div id="zh-parent" class="section">
+    <div class="section-header"><div class="section-num">09</div><div class="section-titles"><h2>📞 家长沟通渠道</h2><div class="section-subtitle">Parent Communication</div></div></div>
+    <div class="content-block">
+      <h3>🤝 一、家长会安排</h3>
+      <ul>
+        <li>学期中家长会：每学年2次，线上+线下同步开展 🎥🤝</li>
+        <li>毕业专项家长会：毕业学年春季学期举办，专属升学指导沟通 🎓</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🔐 二、家长门户</h3>
+      <p>学校专属家长线上平台，可实时查询学生在校成绩、考勤情况、校园通知、作业安排、缴费记录，同步学生在校动态与成长情况 📊📈。</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 三、学校通知系统</h3>
+      <p>邮件、短信、家长专属APP三重通知体系 📧📱，涵盖校园活动、假期安排、紧急通知、学业提醒等全维度信息，确保家校信息及时同步 🤝。</p>
+    </div>
+    <div class="content-block">
+      <h3>🌍 四、国际生家长专属服务</h3>
+      <p>提供校园参观、住宿咨询、本地生活指导 🗺️；配备国际生家长专属对接专员，全程提供沟通答疑与家校对接服务 🧑🏫。</p>
+    </div>
+  </div>
+  <!-- 10 结语与附录 -->
+  <div id="zh-ending" class="section">
+    <div class="section-header"><div class="section-num">10</div><div class="section-titles"><h2>📎 结语与附录</h2><div class="section-subtitle">Final Words & Appendix</div></div></div>
+    <div class="content-block">
+      <p>欢迎来到Berwick Academy 🎉，这所拥有两百余年历史的学校，不仅会为你提供优质的学术教育，更会给你一段充满温暖与成长的留学生活 💛。</p>
+      <p style="margin-top: 16px;">本手册所有在校生经验内容均来自在校国际生的真实经历与一手信息 ✨，官方内容均源自Berwick Academy官网，只为帮你更快适应这里的生活，少走弯路 🚫❌。初到异国他乡，感到陌生与不安是最正常的事，不必给自己过多压力 😌。</p>
+      <p style="margin-top: 16px;">学校的国际生办公室、舍监、任课老师，还有已经在这里的学长学姐，都是你可以随时求助的对象 🤝。愿你在Berwick的日子里，学业有成，收获真挚的友谊，看见更广阔的世界，成为更好的自己 💪！</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"这里不是完美的，但这里一定能给你意想不到的成长 📈。勇敢一点，去尝试，去交流，去体验，你会爱上这里的 💖。"</div>
+      <div class="quote-attr">— 全体在校国际住校生</div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="content-block">
+      <h3>📎 附录：紧急联系方式</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">学校总机</div>
+          <div class="card-body">+1 (207) 384-2164</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📧</div>
+          <div class="card-title">国际生办公室</div>
+          <div class="card-body">international@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👩‍💼</div>
+          <div class="card-title">专属负责人</div>
+          <div class="card-body">Ms. Gabarro, mgabarro@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">24小时应急热线</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 中文手册页脚 -->
+  <footer>
+    <p class="gold">Berwick Academy · 全球桥梁计划 🌉</p>
+    <p>本手册官方信息源自Berwick Academy官网<br>在校生经验内容由现任国际住校生联合撰写<br>Est. 1791 · South Berwick, Maine</p>
+    <a href="#language-selector" class="switch-lang-btn">🔄 切换语言 / Switch Language</a>
+  </footer>
+</div>
+<!-- 英文完整版手册【与中文内容完全对应 | 新增Emoji优化】 -->
+<div class="lang-container" id="lang-en">
+  <!-- 封面 -->
+  <div class="cover">
+    <div class="cover-badge">🏫 Berwick Academy · South Berwick, Maine</div>
+    <h1 class="cover-title">📚 International Student<br>Handbook</h1>
+    <p class="cover-subtitle">Official Guide for International Boarding Students</p>
+    <div class="cover-divider"></div>
+    <p class="cover-author">Official Information from Berwick Academy<br>✍️ Written by Current International Boarding Students</p>
+  </div>
+  <!-- 目录【全标题超链接跳转，与章节id一一对应 | 新增Emoji】 -->
+  <div class="toc">
+    <div class="toc-inner">
+      <div class="toc-label">📖 Contents</div>
+      <div class="toc-items">
+        <a href="#en-advantage" class="toc-item"><span class="toc-num">00</span><div><div class="toc-text">🏫 The Berwick Advantage & School Overview</div><div class="toc-en">Mission & Core Facts</div></div></a>
+        <a href="#en-prearrival" class="toc-item"><span class="toc-num">01</span><div><div class="toc-text">✈️ Pre-Arrival Guide</div><div class="toc-en">Before You Arrive in the U.S.</div></div></a>
+        <a href="#en-dorm" class="toc-item"><span class="toc-num">02</span><div><div class="toc-text">🏠 Dorm Life</div><div class="toc-en">Residential Living</div></div></a>
+        <a href="#en-academics" class="toc-item"><span class="toc-num">03</span><div><div class="toc-text">📝 Academics & College Counseling</div><div class="toc-en">Learning & College Prep</div></div></a>
+        <a href="#en-campus" class="toc-item"><span class="toc-num">04</span><div><div class="toc-text">🎨 Campus Life & Clubs</div><div class="toc-en">Daily Life & Activities</div></div></a>
+        <a href="#en-athletics" class="toc-item"><span class="toc-num">05</span><div><div class="toc-text">⚽ Athletics</div><div class="toc-en">Sports & Varsity Teams</div></div></a>
+        <a href="#en-local" class="toc-item"><span class="toc-num">06</span><div><div class="toc-text">🏙️ Local Life</div><div class="toc-en">Around the Campus</div></div></a>
+        <a href="#en-fees" class="toc-item"><span class="toc-num">07</span><div><div class="toc-text">💰 Tuition & Admission Requirements</div><div class="toc-en">Fees & Application</div></div></a>
+        <a href="#en-visa" class="toc-item"><span class="toc-num">08</span><div><div class="toc-text">🆔 Visa & Health Safety</div><div class="toc-en">Compliance & Wellness</div></div></a>
+        <a href="#en-parent" class="toc-item"><span class="toc-num">09</span><div><div class="toc-text">📞 Parent Communication</div><div class="toc-en">Family Resources</div></div></a>
+        <a href="#en-ending" class="toc-item"><span class="toc-num">10</span><div><div class="toc-text">📎 Final Words & Appendix</div><div class="toc-en">Closing & Emergency Contacts</div></div></a>
+      </div>
+    </div>
+  </div>
+  <!-- 00 The Berwick Advantage & School Overview -->
+  <div id="en-advantage" class="section">
+    <div class="section-header"><div class="section-num">00</div><div class="section-titles"><h2>🏫 The Berwick Advantage & School Overview</h2><div class="section-subtitle">Mission & Core Facts</div></div></div>
+    <div class="content-block">
+      <p>Founded in 1791, with its founding mission signed by John Hancock, Berwick Academy upholds the educational philosophy of "virtue and useful knowledge". As one of the oldest private college-preparatory schools in New England, we have maintained a commitment to high-quality elite education for more than 200 years 🎓.</p>
+    </div>
+    <div class="content-block">
+      <h3>👨🏫 Our Faculty's 5 Core Commitments</h3>
+      <ol>
+        <li>We are big enough to offer you a rich array of course options, yet small enough to deliver a personalized learning experience tailored just for you.</li>
+        <li>We empower you to find your own success and life purpose in a complex and rapidly changing world.</li>
+        <li>We enable you to exceed your own academic expectations and fully prepare for your college applications.</li>
+        <li>We challenge you with healthy competition, allowing you to shine in athletics and the arts.</li>
+        <li>We broaden your horizons through abundant practical opportunities, support your pursuit of excellence, and unlock your unique individual potential.</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📊 Official School Core Facts</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">Founded</div>
+          <div class="card-body">1791</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏞️</div>
+          <div class="card-title">Campus Size</div>
+          <div class="card-body">80 Acres</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👥</div>
+          <div class="card-title">Total Enrollment</div>
+          <div class="card-body">520 students (Pre-K through Grade 12)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Student-Teacher Ratio</div>
+          <div class="card-body">8:1</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <div class="card-title">International Student Ratio</div>
+          <div class="card-body">Approximately 5%</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <div class="card-title">Location</div>
+          <div class="card-body">~1 hour north of Boston</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">Community Reach</div>
+          <div class="card-body">85 communities, 25 bus routes</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💴</div>
+          <div class="card-title">Financial Aid</div>
+          <div class="card-body">41% of students receive aid</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 01 Pre-Arrival Guide -->
+  <div id="en-prearrival" class="section">
+    <div class="section-header"><div class="section-num">01</div><div class="section-titles"><h2>✈️ Pre-Arrival Guide</h2><div class="section-subtitle">Before You Arrive in the U.S.</div></div></div>
+    <div class="content-block">
+      <p>This section is the core preparation guide for international students before arriving in the U.S., combining official school rules and real experience from current boarding students to help you avoid unnecessary pitfalls 🚫❌.</p>
+    </div>
+    <div class="content-block">
+      <h3>🛬 1. Arrival & Transportation</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">✈️</div>
+          <div class="card-title">Recommended Airport</div>
+          <div class="card-body">Boston Logan International Airport (BOS)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">Recommended Transport</div>
+          <div class="card-body">C&J Bus to Dover/Portsmouth</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">Check-in Deadline</div>
+          <div class="card-body">1 day before semester starts</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎒 2. Mandatory Packing List</h3>
+      <ol>
+        <li><strong>Daily Necessities</strong>: Bedding (school only provides a basic mattress; bring your own sheets, duvet covers, pillowcases, quilts, etc.); students from non-110V countries must bring a U.S.-compatible voltage converter 🔌</li>
+        <li><strong>Personal Items</strong>: You may bring seasonings and snacks from your hometown to ease homesickness 🥘🍬; personal prescription medications must be brought with English instructions and a valid prescription 💊</li>
+        <li><strong>Important Documents</strong>: Core documents including the original I-20, vaccination certificate, admission letter, and copies of your passport and visa must be carried with you at all times. DO NOT check them in with your luggage 📄</li>
+      </ol>
+    </div>
+  </div>
+  <!-- 02 Dorm Life -->
+  <div id="en-dorm" class="section">
+    <div class="section-header"><div class="section-num">02</div><div class="section-titles"><h2>🏠 Dorm Life</h2><div class="section-subtitle">Residential Living</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academy provides a dedicated single-family residential dorm exclusively for high school boarding students, which is a core part of the Hilltop campus life 🏡.</p>
+    </div>
+    <div class="content-block">
+      <h3>🛏️ 1. Room & On-Site Facilities</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛏️</div>
+          <div class="card-title">Room Configuration</div>
+          <div class="card-body">2-story building, 6 rooms (single/double/triple), private bathroom</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍳</div>
+          <div class="card-title">Kitchen Facilities</div>
+          <div class="card-body">Full fridge/microwave/cookware/dishwasher</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">Common Areas</div>
+          <div class="card-body">Free laundry, TV+PS5 lounge</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">Electronic Devices</div>
+          <div class="card-body">No usage restrictions</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🔢 2. Room Assignment Rules</h3>
+      <p>Rooms are assigned under a <strong>boarding seniority priority system</strong>: sorted by the length of time the student has boarded on campus. The longer the boarding tenure, the higher the priority for room selection. International students may apply to live with local domestic students 🤝.</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 3. Daily Management & Rules</h3>
+      <ul>
+        <li>Dining Arrangement: Dinner is delivered from the school cafeteria to the dorm at 18:00 every evening, and all boarding students dine together in the front hall 🍽️</li>
+        <li>Schedule & Curfew: Lights out at 23:00 on weekdays, only quiet activities that do not disturb others are permitted; curfew rules are more relaxed on weekends ⏰</li>
+        <li>Food Delivery & Packages: The dorm supports normal food delivery and package receipt 📦🍕</li>
+        <li>Visitor Management: To bring off-campus friends/visitors into the dorm, you must submit a formal application in advance. Entry is only permitted after approval 🚪</li>
+        <li>Common Area Management: All boarding students take turns completing cleaning chores for the common areas to maintain the living environment together 🧹</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>👨👩👧👦 4. Dorm Parents & Safety Assurance</h3>
+      <ul>
+        <li>The dorm is staffed with 5 Dorm Parents in total, 3 of whom live in the dorm building with students, and the remaining 2-3 live near the campus. While each Dorm Parent has a different style, all prioritize student safety and needs, and you can seek help at any time if you encounter any problems 🆘</li>
+        <li>Departure Management: Every time you leave the dorm, you must complete departure registration on the school's web system. Parents and teachers can view your whereabouts records in real time to fully ensure student safety 📍</li>
+        <li>Health Support: The school has a Health Center for common illnesses and a certified athletic trainer's office for sports injuries. In case of serious conditions, the Dorm Parent will accompany the student to the hospital for treatment immediately 🏥</li>
+        <li>Official Wellness System: The school has a Student Wellness Advisory Team (SWAT) to provide comprehensive health and psychological support for all students 🧠</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"This was my first time living in a dorm, and I was really uncomfortable at first—having roommates, a fixed dinner time, everything was unfamiliar. But once we started playing PS5 together and joining sports teams, I fit right in. If you have different preferences, just speak up directly. Roommates are always willing to compromise, and everyone here is really kind 💛."</div>
+      <div class="quote-attr">— Current Chinese Boarding Student</div>
+    </div>
+  </div>
+  <!-- 03 Academics & College Counseling -->
+  <div id="en-academics" class="section">
+    <div class="section-header"><div class="section-num">03</div><div class="section-titles"><h2>📝 Academics & College Counseling</h2><div class="section-subtitle">Learning & College Prep</div></div></div>
+    <div class="content-block">
+      <h4>📚 Official Learning Framework: Pathway of a Learner</h4>
+      <p>At Berwick Academy, learning is not a checklist—it is a complete journey of growth. Guided by our core mission of "virtue and useful knowledge", we have built the Pathway of a Learner framework from Pre-K through Grade 12, divided into three stages: Lower School, Middle School, and Upper School, to cultivate students' curiosity, confidence, and character throughout their academic journey 🧠💪.</p>
+    </div>
+    <div class="content-block">
+      <h3>📖 1. Courses & Course Selection Guide</h3>
+      <ul>
+        <li><strong>Official Signature Courses - Pinnacle Courses</strong>: Exclusive advanced courses for Upper School students, designed to challenge students to tackle real-world problems and ideas, and apply their knowledge in meaningful ways. This is the core feature of the school's academic system 🚀</li>
+        <li><strong>Fabrication Studio</strong>: Our dedicated on-campus fabrication studio, which fosters problem-solving skills and practical innovation capabilities for Upper School students 🛠️</li>
+        <li>Curriculum System: <strong>The school does NOT offer AP courses</strong>, but offers advanced honors courses with the same academic rigor as AP courses, meeting the academic requirements of top college preparatory programs and supporting students' college admission goals 🎯</li>
+        <li>Language Support: The school does NOT offer ESL tutoring courses. All courses are delivered in an all-English instructional environment. The school comprehensively evaluates students' English proficiency and adaptability to an all-English learning environment through interviews, academic performance, and other dimensions 🗣️</li>
+        <li>Required Courses for First-Year Students: 4 core courses are mandatory for first-year freshmen: English, Mathematics, Second Foreign Language, and History 📚</li>
+        <li>Course Selection Advice: It is recommended that first-year freshmen pair core courses with less academically intensive courses such as fine arts in their first year to smoothly adapt to the academic rhythm of an American high school 🎨</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🏆 2. Honors Courses List</h3>
+      <p>Honors English, Honors Mathematics, Honors Biology, Honors Chemistry, Honors History, Honors Foreign Language Series, Pinnacle Advanced Signature Courses</p>
+    </div>
+    <div class="content-block">
+      <h3>🎓 3. Graduation Credit Requirements</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">Total Credits Required</div>
+          <div class="card-body">Minimum 22 credits</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <div class="card-title">English</div>
+          <div class="card-body">4 credits</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧮</div>
+          <div class="card-title">Mathematics</div>
+          <div class="card-body">3 credits</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔬</div>
+          <div class="card-title">Natural Science</div>
+          <div class="card-body">3 credits</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">Social Science</div>
+          <div class="card-body">3 credits</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗣️</div>
+          <div class="card-title">Second Foreign Language</div>
+          <div class="card-body">2 credits</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">Arts</div>
+          <div class="card-body">2 credits</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏃</div>
+          <div class="card-title">Health & PE</div>
+          <div class="card-body">1 credit</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📚 4. On-Campus Academic Resources</h3>
+      <ul>
+        <li>School Library Opening Hours: <strong>8:00-17:00 Daily</strong>, providing study spaces, book lending, academic material inquiry and other services 📖</li>
+        <li>After-School Tutoring: The school provides after-school academic tutoring support, and students can make appointments for subject-specific tutoring as needed 📝</li>
+        <li>Student Leadership Opportunities: The school offers a wide range of student leadership positions, including Grade 12 Prefects, Student Wellness Advisory Team (SWAT), etc., to support students' all-round development 🚀</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🎓 5. College Counseling</h3>
+      <ul>
+        <li>Staffing: The school's College Counseling Office is staffed with 3 dedicated college counselors, who provide full-process support for students' college planning 🧑🏫</li>
+        <li>Service Timeline: One-on-one dedicated support starts in Grade 10, regular college planning meetings begin in Grade 11, and full-process dedicated guidance for college applications is provided in Grade 12 ✍️</li>
+        <li>College Admission Outcomes: The school has an outstanding college admission record, with many students admitted to the Top 20 U.S. universities and Ivy League institutions every year. A large number of student-athletes advance to NCAA Division I, II, and III colleges each year to continue their athletic and academic careers 🥇</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 04 Campus Life & Clubs -->
+  <div id="en-campus" class="section">
+    <div class="section-header"><div class="section-num">04</div><div class="section-titles"><h2>🎨 Campus Life & Clubs</h2><div class="section-subtitle">Daily Life & Activities</div></div></div>
+    <div class="content-block">
+      <h3>🕒 1. Daily Campus Schedule</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⏰</div>
+          <div class="card-title">School Hours</div>
+          <div class="card-body">8:00-15:00, 5-min breaks between classes</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍽️</div>
+          <div class="card-title">Lunch Time</div>
+          <div class="card-body">50 minutes, daily updated menu</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥗</div>
+          <div class="card-title">Dining Features</div>
+          <div class="card-body">Ethnic Food Day, vegetarian/gluten-free options</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎭 2. Official Arts & Events System</h3>
+      <p>The school encourages students' all-round development. Student-athletes can simultaneously participate in theatrical stage performances, band performances and other art programs, with no conflict between athletic and artistic development 🎵⚽.</p>
+      <ul>
+        <li>Middle School: Annual musical performance with extremely high participation rate; some popular roles are performed by multiple students in separate shows. It also has a rich club activity system 🎶</li>
+        <li>Upper School: Annual Visual & Performing Arts Shows, Private Music Lesson Recitals, Dance Company Concerts, drama and musical performances, and other art events are held every year 🎨</li>
+        <li>Annual Traditions: 3rd Grade Kite Project, 4th Grade Tree House Project, Campus Book Fairs, All-School Earth Day Program, Blue & White Week/Day, Grandparents and Special Friends Day, Berwick Innovation Celebration, and more 🎪</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🧩 3. Full Official Club List</h3>
+      <h4>📝 Academic Clubs</h4>
+      <p>Math Competition Club, Science Olympiad, Debate Club, Speech Club, Academic Bowl, Programming Club, Writing Club, History Club, Robotics Club 🤖</p>
+      <h4>🎨 Arts Clubs</h4>
+      <p>Choir, Band, Drama Club, Dance Club, Visual Art Club, Photography Club, Handicraft Creation Club, Film Club, Fashion Design Club 📸</p>
+      <h4>🤝 Service Clubs</h4>
+      <p>Community Service Club, Volunteer Alliance, Environmental Protection Club, Charity Club, Animal Protection Club, Campus Service Club, International Aid Club 🌱</p>
+      <h4>🌍 Cultural Clubs</h4>
+      <p>Chinese Culture Club, European Culture Club, Multicultural Club, International Student Association, Language Exchange Club 🗣️</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 4. Club Activity Guidelines</h3>
+      <ol>
+        <li>Club Fair: About one month after the start of the semester, the school holds a week-long club fair, where all students can sign up and join freely 📣</li>
+        <li>Featured Clubs: The Chinese Culture Club provides an exclusive platform for Chinese and Asian international students for cultural exchange and festival celebrations, and is also a great channel for new students to quickly integrate into campus life 🎑; The Drama Club holds about 5 formal stage performances every year, with no experience threshold, and welcomes all students to sign up 🎭</li>
+        <li>Community Service: The school has no mandatory community service hour requirements. Students can voluntarily participate in on-campus and off-campus community service projects according to their personal interests 🧑🤝🧑</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📅 5. Official Academic Calendar</h3>
+      <p>The official academic calendar for the school year will be officially released by the school after admission, which fully includes core information such as school start/end dates, holiday arrangements, exam weeks, key campus milestones, and event schedules. After admission, freshmen can obtain the latest official academic calendar in real time through the school's official website, admission notice email, and student exclusive portal to plan their studies and travel in advance.</p>
+    </div>
+  </div>
+  <!-- 05 Athletics -->
+  <div id="en-athletics" class="section">
+    <div class="section-header"><div class="section-num">05</div><div class="section-titles"><h2>⚽ Athletics</h2><div class="section-subtitle">Sports & Varsity Teams</div></div></div>
+    <div class="content-block">
+      <h4>🐶 Official Athletic Brand: Berwick Bulldogs</h4>
+      <p>Athletics is a core component of Berwick Academy's campus culture. With a philosophy of healthy competition, the school encourages students to challenge themselves and shine in the field of sports 💪. There is fixed training every day after school, and the vast majority of coaches are also classroom teachers at the school, who attach great importance to the balanced development of students' academics and sports 📚⚽.</p>
+    </div>
+    <div class="content-block">
+      <h3>🏆 1. Full Athletic Programs</h3>
+      <h4>🍂 Fall Varsity/JV Teams</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚽</div>
+          <div class="card-title">Boys' Sports</div>
+          <div class="card-body">Soccer, Cross Country, Golf</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏐</div>
+          <div class="card-title">Girls' Sports</div>
+          <div class="card-body">Soccer, Cross Country, Volleyball</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">Season Timeline</div>
+          <div class="card-body">September - November</div>
+        </div>
+      </div>
+      <h4>⛄ Winter Varsity/JV Teams</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏀</div>
+          <div class="card-title">Boys' Sports</div>
+          <div class="card-body">Basketball, Wrestling</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏊‍♀️</div>
+          <div class="card-title">Girls' Sports</div>
+          <div class="card-body">Basketball, Swimming</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">Season Timeline</div>
+          <div class="card-body">December - February</div>
+        </div>
+      </div>
+      <h4>🌸 Spring Varsity/JV Teams</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚾</div>
+          <div class="card-title">Boys' Sports</div>
+          <div class="card-body">Baseball, Tennis, Track and Field</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥎</div>
+          <div class="card-title">Girls' Sports</div>
+          <div class="card-body">Softball, Tennis, Track and Field</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">Season Timeline</div>
+          <div class="card-body">March - May</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎉 2. Campus Athletic Culture</h3>
+      <ul>
+        <li>Official Collegiate Athletic Pathway: A large number of student-athletes advance to NCAA Division I, II, and III colleges every year to continue their athletic and academic careers. The school provides comprehensive college application support for student-athletes 🎓</li>
+        <li>Game Atmosphere: Home games are attended by a large number of on-campus students to cheer, and away games often have parent volunteers providing team dinners for the team, creating a strong community atmosphere 🧑👩👧👦</li>
+        <li>Exclusive Benefits for International Students: Sports are one of the best channels for international students to quickly integrate into campus life. There is no language barrier to communication on the field, and it is also an excellent scenario to learn authentic English slang and build deep friendships 🤝</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"I play on the school's soccer, baseball and tennis teams. Sports helped me build real friendships with my teammates really quickly. We use a lot of slang when we play, which is something you never learn in class, and it made my English improve so much faster 📈."</div>
+      <div class="quote-attr">— Current Chinese Boarding Student</div>
+    </div>
+  </div>
+  <!-- 06 Local Life -->
+  <div id="en-local" class="section">
+    <div class="section-header"><div class="section-num">06</div><div class="section-titles"><h2>🏙️ Local Life</h2><div class="section-subtitle">Around the Campus</div></div></div>
+    <div class="content-block">
+      <p>South Berwick is a quiet New England town with a permanent population of approximately 7,500 residents. The town has complete supporting facilities, and more abundant living resources are concentrated within a 30-minute drive. The school is located approximately 1 hour north of Boston with convenient transportation 🚗.</p>
+    </div>
+    <div class="content-block">
+      <h3>🛒 1. Daily Shopping & Dining</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛍️</div>
+          <div class="card-title">Grocery Stores</div>
+          <div class="card-body">Nature's Way Market / Hannaford</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍜</div>
+          <div class="card-title">Dining Options</div>
+          <div class="card-body">Chinese, Korean, Japanese restaurants (30min drive)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💸</div>
+          <div class="card-title">Shopping Tip</div>
+          <div class="card-body">No sales tax in New Hampshire</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📞 2. Local Basic Services</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏦</div>
+          <div class="card-title">Banking Services</div>
+          <div class="card-body">M&T Bank, local account opening</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">Telecom Services</div>
+          <div class="card-body">Physical SIM / eSIM available</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚗</div>
+          <div class="card-title">Transportation Support</div>
+          <div class="card-body">Dorm dedicated vehicle pick-up</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎪 3. Weekend Activities</h3>
+      <p>The school regularly organizes weekend group activities such as movie watching, beach walks, and golf 🏖️⛳. An annual trip to watch a Boston Red Sox baseball game is also scheduled, which is one of the most anticipated events of the year for on-campus students ⚾.</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"The town is quiet, but it's never boring at all. Within a 30-minute drive, you can find Asian grocery stores, Korean BBQ, Japanese restaurants, and the school also arranges a lot of weekend activities. Most importantly, this quietness allows you to really focus on your studies and sports, and grow a lot 📈."</div>
+      <div class="quote-attr">— Current Chinese Boarding Student</div>
+    </div>
+  </div>
+  <!-- 07 Tuition & Admission Requirements -->
+  <div id="en-fees" class="section">
+    <div class="section-header"><div class="section-num">07</div><div class="section-titles"><h2>💰 Tuition & Admission Requirements</h2><div class="section-subtitle">Fees & Application</div></div></div>
+    <div class="content-block">
+      <h3>💴 1. 2026-2027 Academic Year Official Fees</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">💵</div>
+          <div class="card-title">Tuition</div>
+          <div class="card-body">~$50,000/year (MS/HS uniform)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏠</div>
+          <div class="card-title">Boarding Fee</div>
+          <div class="card-body">$18,500/year (includes 3 meals)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🩹</div>
+          <div class="card-title">Insurance Fee</div>
+          <div class="card-body">$1,800/year (mandatory)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎫</div>
+          <div class="card-title">Other Fees</div>
+          <div class="card-body">App Fee $150, Reg Fee $500, Activity Fee $1,200</div>
+        </div>
+      </div>
+      <h4>📋 Insurance Requirement</h4>
+      <p>Purchase of the U.S. designated campus medical insurance is mandatory 🩹. Overseas insurance is not accepted. The insurance covers full-year medical, emergency, and inpatient services 🏥.</p>
+      <h4>💳 Payment Methods</h4>
+      <p>Wire transfer, credit card, and online payment platforms are supported. Full payment must be made 30 days before the start of the semester. Installment payment is available upon school review and approval 📅.</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 2. Official Admission Requirements for International Students</h3>
+      <h4>📝 Application Process</h4>
+      <ol>
+        <li>Submit the online application form and application fee</li>
+        <li>Submit academic transcripts, letters of recommendation, and personal application essay ✍️</li>
+        <li>Attend a campus interview (online/in-person options available 🎥🤝)</li>
+        <li>Comprehensive review by the school and release of admission results 📧</li>
+        <li>Confirm admission, pay the enrollment deposit, and apply for I-20 📄</li>
+        <li>Apply for a visa and complete enrollment registration ✅</li>
+      </ol>
+      <h4>🗣️ English Proficiency Evaluation Guidelines</h4>
+      <p>The school has <strong>no mandatory standardized language test score requirements</strong>. It will comprehensively evaluate the student's English proficiency and adaptability to an all-English teaching environment through interview performance, academic transcripts, personal essays and other materials 🧐.</p>
+      <h4>💉 Mandatory Vaccination Requirements</h4>
+      <p>Students must complete the full set of vaccines required by the U.S.: Measles, Mumps, Rubella (MMR), Varicella (Chickenpox), Tdap (Tetanus, Diphtheria, Pertussis), Hepatitis B, Influenza, and Meningococcal vaccines. Official vaccination records must be submitted, and students who do not meet the requirements will not be allowed to enroll 📄.</p>
+      <h4>📄 I-20 Issuance Rules</h4>
+      <ul>
+        <li>I-20 will be issued within 10 business days after receipt of the admission letter and confirmation of the enrollment deposit payment 📧</li>
+        <li>Proof of funds must be provided to demonstrate the ability to pay tuition and living expenses 💵</li>
+        <li>Issued only to international students who meet the requirements of the U.S. Citizenship and Immigration Services (USCIS), and must complete the full application process ✅</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 08 Visa & Health Safety -->
+  <div id="en-visa" class="section">
+    <div class="section-header"><div class="section-num">08</div><div class="section-titles"><h2>🆔 Visa & Health Safety</h2><div class="section-subtitle">Compliance & Wellness</div></div></div>
+    <div class="content-block">
+      <h3>📄 1. Visa & Compliance Support</h3>
+      <h4>🌍 Designated International Student Contact</h4>
+      <p>For all issues during your study at the school, you may contact the dedicated coordinator <strong>Ms. Gabarro</strong> at mgabarro@berwickacademy.org 📧</p>
+      <h4>🆔 F1 Visa Services</h4>
+      <p>The school has a dedicated staff member responsible for F1 student visa-related matters, including SEVIS information updates, I-20 document maintenance, and document support for entry and exit during holidays. SEVIS information is updated uniformly every summer, and the school will notify students in advance to complete the relevant procedures 📅.</p>
+    </div>
+    <div class="content-block">
+      <h3>🩹 2. Official Health & Safety Services</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏥</div>
+          <div class="card-title">Health Center</div>
+          <div class="card-body">Mon-Fri 8:00-18:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <div class="card-title">Counseling Services</div>
+          <div class="card-body">Free 1:1, Mon-Fri 9:00-17:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">Emergency Response</div>
+          <div class="card-body">24/7 security + one-touch alarm system</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">Emergency Hotline</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 09 Parent Communication -->
+  <div id="en-parent" class="section">
+    <div class="section-header"><div class="section-num">09</div><div class="section-titles"><h2>📞 Parent Communication</h2><div class="section-subtitle">Family Resources</div></div></div>
+    <div class="content-block">
+      <h3>🤝 1. Parent-Teacher Conference Schedule</h3>
+      <ul>
+        <li>Mid-Semester Parent-Teacher Conferences: Held twice per academic year, available both online and in-person 🎥🤝</li>
+        <li>Senior Graduation Special Parent Conference: Held in the spring semester of the graduation year, for dedicated college counseling communication 🎓</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🔐 2. Parent Portal</h3>
+      <p>The school's dedicated online parent portal allows you to check your child's on-campus grades, attendance, campus notices, homework schedules, payment records in real time, and stay updated on your child's campus dynamics and growth progress 📊📈.</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 3. School Notification System</h3>
+      <p>A three-tier notification system via email, SMS, and the dedicated parent app 📧📱, covering all dimensions of information including campus events, holiday schedules, emergency notices, and academic reminders, to ensure timely and synchronized communication between home and school 🤝.</p>
+    </div>
+    <div class="content-block">
+      <h3>🌍 4. Exclusive Services for International Student Parents</h3>
+      <p>We provide campus tours, residential consultation, and local life guidance 🗺️, with a dedicated coordinator for international student parents, providing full-process communication, Q&A, and home-school connection services 🧑🏫.</p>
+    </div>
+  </div>
+  <!-- 10 Final Words & Appendix -->
+  <div id="en-ending" class="section">
+    <div class="section-header"><div class="section-num">10</div><div class="section-titles"><h2>📎 Final Words & Appendix</h2><div class="section-subtitle">Closing & Emergency Contacts</div></div></div>
+    <div class="content-block">
+      <p>Welcome to Berwick Academy 🎉. This school, with a history of more than 200 years, will not only provide you with high-quality academic education, but also give you a warm and growth-filled international student life 💛.</p>
+      <p style="margin-top: 16px;">All the boarding student experience content in this handbook comes from the real experiences and first-hand information of current international students ✨, and all official content is sourced from the official Berwick Academy website, solely to help you adapt to life here faster and avoid unnecessary detours 🚫❌. It is completely normal to feel unfamiliar and anxious when you first arrive in a foreign country, and there is no need to put too much pressure on yourself 😌.</p>
+      <p style="margin-top: 16px;">The school's International Student Office, Dorm Parents, classroom teachers, and the senior students who are already here are all people you can turn to for help at any time 🤝. May your days at Berwick be filled with academic success, sincere friendships, a broader view of the world, and growth into a better version of yourself 💪!</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"This place is not perfect, but it will definitely give you growth beyond your imagination 📈. Be brave, try new things, communicate with people, and experience everything. You will fall in love with here 💖."</div>
+      <div class="quote-attr">— All Current International Boarding Students</div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="content-block">
+      <h3>📎 Appendix: Emergency Contact List</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">School Main Line</div>
+          <div class="card-body">+1 (207) 384-2164</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📧</div>
+          <div class="card-title">International Student Office</div>
+          <div class="card-body">international@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👩‍💼</div>
+          <div class="card-title">Dedicated Coordinator</div>
+          <div class="card-body">Ms. Gabarro, mgabarro@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">24/7 Emergency Hotline</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 英文手册页脚 -->
+  <footer>
+    <p class="gold">Berwick Academy · Global Bridge Project 🌉</p>
+    <p>Official Information from Berwick Academy<br>Student Experience Content Written by Current International Boarding Students<br>Est. 1791 · South Berwick, Maine</p>
+    <a href="#language-selector" class="switch-lang-btn">🔄 Switch Language</a>
+  </footer>
+</div>
+<!-- 日文完整版手册【中文内容と100%完全対応 | 新增Emoji优化】 -->
+<div class="lang-container" id="lang-ja">
+  <!-- 表紙 -->
+  <div class="cover">
+    <div class="cover-badge">🏫 Berwick Academy · メイン州サウスバーウィック</div>
+    <h1 class="cover-title">📚 留学生生活ハンドブック</h1>
+    <p class="cover-subtitle">International Student Handbook</p>
+    <div class="cover-divider"></div>
+    <p class="cover-author">公式情報はBerwick Academy公式サイトより<br>✍️ 現役寮生国際学生が共同執筆</p>
+  </div>
+  <!-- 目次【全タイトル超リンクジャンプ・章節IDと一対一対応 | 新增Emoji】 -->
+  <div class="toc">
+    <div class="toc-inner">
+      <div class="toc-label">📖 目次</div>
+      <div class="toc-items">
+        <a href="#ja-advantage" class="toc-item"><span class="toc-num">00</span><div><div class="toc-text">🏫 学校概要と教育理念</div><div class="toc-en">The Berwick Advantage</div></div></a>
+        <a href="#ja-prearrival" class="toc-item"><span class="toc-num">01</span><div><div class="toc-text">✈️ 入学前ガイド</div><div class="toc-en">Pre-Arrival Guide</div></div></a>
+        <a href="#ja-dorm" class="toc-item"><span class="toc-num">02</span><div><div class="toc-text">🏠 寮生活</div><div class="toc-en">Dorm Life</div></div></a>
+        <a href="#ja-academics" class="toc-item"><span class="toc-num">03</span><div><div class="toc-text">📝 学業と進路指導</div><div class="toc-en">Academics & Counseling</div></div></a>
+        <a href="#ja-campus" class="toc-item"><span class="toc-num">04</span><div><div class="toc-text">🎨 キャンパスライフとクラブ</div><div class="toc-en">Campus Life & Clubs</div></div></a>
+        <a href="#ja-athletics" class="toc-item"><span class="toc-num">05</span><div><div class="toc-text">⚽ 体育と部活動</div><div class="toc-en">Athletics</div></div></a>
+        <a href="#ja-local" class="toc-item"><span class="toc-num">06</span><div><div class="toc-text">🏙️ 地域生活情報</div><div class="toc-en">Local Life</div></div></a>
+        <a href="#ja-fees" class="toc-item"><span class="toc-num">07</span><div><div class="toc-text">💰 学費と入学要件</div><div class="toc-en">Tuition & Admission</div></div></a>
+        <a href="#ja-visa" class="toc-item"><span class="toc-num">08</span><div><div class="toc-text">🆔 ビザと健康安全</div><div class="toc-en">Visa & Health Safety</div></div></a>
+        <a href="#ja-parent" class="toc-item"><span class="toc-num">09</span><div><div class="toc-text">📞 保護者様向け窓口</div><div class="toc-en">Parent Communication</div></div></a>
+        <a href="#ja-ending" class="toc-item"><span class="toc-num">10</span><div><div class="toc-text">📎 おわりにと付録</div><div class="toc-en">Final & Appendix</div></div></a>
+      </div>
+    </div>
+  </div>
+  <!-- 00 学校概要と教育理念 -->
+  <div id="ja-advantage" class="section">
+    <div class="section-header"><div class="section-num">00</div><div class="section-titles"><h2>🏫 学校概要と教育理念</h2><div class="section-subtitle">The Berwick Advantage</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academyは1791年に設立され、ジョン・ハンコックによって創設ミッションが署名された、アメリカ・ニューイングランド地方で最も歴史のある私立大学予備校の一つです。「美徳と実用的な知識」を教育理念に、200年以上にわたり質の高いエリート教育を提供し続けています 🎓。</p>
+    </div>
+    <div class="content-block">
+      <h3>👨🏫 教師陣の5つの核心的な約束</h3>
+      <ol>
+        <li>豊富なコース選択を提供するのに十分な規模でありながら、一人ひとりに合わせた学習体験をカスタマイズできる規模であること</li>
+        <li>複雑で急速に変化する世界の中で、あなた自身の成功と人生の目的を見つける手助けをすること</li>
+        <li>大学進学に向けて、学業面で自分の予想を超えて成長できるよう力を与えること</li>
+        <li>健全な競争を通じて、スポーツや芸術の分野であなたの才能を輝かせること</li>
+        <li>豊富な実践機会で視野を広げ、卓越性を追求し、あなただけの可能性を最大限に引き出すこと</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📊 学校公式コアデータ</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">設立年</div>
+          <div class="card-body">1791年</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏞️</div>
+          <div class="card-title">キャンパス面積</div>
+          <div class="card-body">80エーカー</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👥</div>
+          <div class="card-title">総在籍数</div>
+          <div class="card-body">520人（Pre-Kから12年生まで）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">生徒教師比</div>
+          <div class="card-body">8:1</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <div class="card-title">国際生比率</div>
+          <div class="card-body">約5%</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <div class="card-title">所在地</div>
+          <div class="card-body">ボストンから北へ車で約1時間</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">通学エリア</div>
+          <div class="card-body">全米85コミュニティ、25路線バス</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💴</div>
+          <div class="card-title">奨学金支援</div>
+          <div class="card-body">41%の学生が支援を受給</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 01 入学前ガイド -->
+  <div id="ja-prearrival" class="section">
+    <div class="section-header"><div class="section-num">01</div><div class="section-titles"><h2>✈️ 入学前ガイド</h2><div class="section-subtitle">Pre-Arrival Guide</div></div></div>
+    <div class="content-block">
+      <p>この章は、アメリカ渡航前の留学生向け核心的な準備ガイドです。学校の公式ルールと現役寮生の実体験を組み合わせ、不要なトラブルを回避するための情報をまとめています 🚫❌。</p>
+    </div>
+    <div class="content-block">
+      <h3>🛬 一、到着と交通手段</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">✈️</div>
+          <div class="card-title">推奨空港</div>
+          <div class="card-body">ボストン・ローガン国際空港 (BOS)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">推奨交通</div>
+          <div class="card-body">C&JバスでDover/Portsmouthまで直行</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">入居期限</div>
+          <div class="card-body">学期開始の1日前</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎒 二、持ち物リスト</h3>
+      <ol>
+        <li><strong>生活必需品</strong>：寝具類（学校はベーシックなマットレスのみを提供し、シーツ・布団カバー・枕カバー・掛け布団などは自身で持参する必要があります）；110V以外の電圧の国から来る学生は、アメリカの電圧に対応した変換プラグを必ず持参してください 🔌</li>
+        <li><strong>個人用品</strong>：ホームシックを和らげるため、故郷の調味料やお菓子などを持参することを推奨します 🥘🍬；常用薬がある場合は、英語の説明書と処方箋を添えて持参してください 💊</li>
+        <li><strong>重要書類</strong>：I-20原本、予防接種証明書、入学許可書、パスポートとビザのコピーなどの核心的な書類は、必ず手荷物に入れて携帯し、預け荷物に入れないでください 📄</li>
+      </ol>
+    </div>
+  </div>
+  <!-- 02 寮生活 -->
+  <div id="ja-dorm" class="section">
+    <div class="section-header"><div class="section-num">02</div><div class="section-titles"><h2>🏠 寮生活</h2><div class="section-subtitle">Dorm Life</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academyでは、高校寮生専用の一戸建て寮を提供しています。寮生活は、本校Hilltopキャンパスライフの核心的な部分を占めています 🏡。</p>
+    </div>
+    <div class="content-block">
+      <h3>🛏️ 一、部屋と付帯設備</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛏️</div>
+          <div class="card-title">部屋構成</div>
+          <div class="card-body">2階建て、全6室（1/2/3人部屋）、専用バスルーム</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍳</div>
+          <div class="card-title">キッチン設備</div>
+          <div class="card-body">冷蔵庫/電子レンジ/調理器具/食洗機完備</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">共有エリア</div>
+          <div class="card-body">無料ランドリー、TV+PS5ラウンジ</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">電子機器</div>
+          <div class="card-body">使用制限なし</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🔢 二、部屋割りルール</h3>
+      <p>部屋は<strong>在寮年数優先制度</strong>で割り当てられます。学校での寮生活年数が長い学生ほど、部屋選択の優先順位が高くなります。国際学生が地元の学生とルームシェアを申し込むことも可能です 🤝。</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 三、日常管理とルール</h3>
+      <ul>
+        <li>食事手配：毎晩18時に学校の食堂から寮に夕食が配達され、全寮生がフロントホールで一緒に食事をします 🍽️</li>
+        <li>生活ルール：平日は夜23時に消灯し、他の人の迷惑にならない静かな活動のみ許可されます。週末の門限ルールは平日より緩和されています ⏰</li>
+        <li>デリバリー・荷物受取：寮ではフードデリバリーや郵便物の受け取りが通常通り利用できます 📦🍕</li>
+        <li>訪問者管理：学外の友人や訪問者を寮に入れる場合は、事前に正式な申請を提出し、許可が下りた後にのみ入場が許可されます 🚪</li>
+        <li>共有エリア管理：全寮生が交代で共有エリアの清掃当番を担当し、共同で生活環境を維持します 🧹</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>👨👩👧👦 四、ハウスペアレントと安全保証</h3>
+      <ul>
+        <li>寮には合計5人のハウスペアレント（寮監）が常駐しており、そのうち3人は寮内で学生と同じ建物に住み、残り2-3人は学校周辺に居住しています。各ハウスペアレントにはそれぞれスタイルの違いがありますが、全員が学生の安全とニーズを最優先に考えており、困ったことがあればいつでも助けを求めることができます 🆘</li>
+        <li>外出管理：寮を離れる際は毎回、学校のウェブシステムで外出登録を行う必要があります。保護者と教師は学生の居場所記録をリアルタイムで確認でき、学生の安全を全方位的に保証します 📍</li>
+        <li>健康サポート：学校には一般的な病気に対応するヘルスセンターと、スポーツ障害に対応する専門トレーナー室が設置されています。症状が重い場合は、ハウスペアレントがすぐに学生に同行して病院を受診します 🏥</li>
+        <li>公式健康サポート体制：学校にはStudent Wellness Advisory Team (SWAT) という学生健康相談チームが設置されており、学生に全方位的な健康と心理的サポートを提供しています 🧠</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"私は寮生活が初めてで、最初は本当に不安でした。ルームメイトがいること、決まった夕食の時間があること、すべてが初めてのことだったからです。でも、一緒にPS5で遊んだり、スポーツチームに入ったりするうちに、すぐに馴染めました。違う意見があっても率直に話せば、ルームメイトはみんな歩み寄ってくれるし、本当にみんな親切です 💛。"</div>
+      <div class="quote-attr">— 現役中国人寮生</div>
+    </div>
+  </div>
+  <!-- 03 学業と進路指導 -->
+  <div id="ja-academics" class="section">
+    <div class="section-header"><div class="section-num">03</div><div class="section-titles"><h2>📝 学業と進路指導</h2><div class="section-subtitle">Academics & Counseling</div></div></div>
+    <div class="content-block">
+      <h4>📚 公式教育システム：Pathway of a Learner</h4>
+      <p>Berwick Academyでは、学びとはチェックリストではなく、一つの完全な成長の旅です。本校は「美徳と実用的な知識」を核に、プレ幼稚園から12年生までのPathway of a Learner教育システムを構築しています。Lower School（小学校）、Middle School（中学校）、Upper School（高校）の3段階に分かれ、学生の好奇心、自信、人格を一貫して育てることを重視しています 🧠💪。</p>
+    </div>
+    <div class="content-block">
+      <h3>📖 一、コースと履修ガイド</h3>
+      <ul>
+        <li><strong>公式特色コース・Pinnacle Courses</strong>：高校部（Upper School）専用の高度なコースで、現実世界の問題やアイデアに取り組み、学んだ知識を有意義な形で応用することを目的とした、本校学術システムの核心的な特色コースです 🚀</li>
+        <li><strong>ものづくり工房・Fabrication Studio</strong>：学校専用の製作工房で、高校生の問題解決能力と実践的なイノベーション能力を育成します 🛠️</li>
+        <li>カリキュラム体系：本校は<strong>APコースを提供していません</strong>。が、APコースと同等の学術的難易度を持つ上級Honorsコースを開設しており、トップ大学進学予備校の学術要件を満たし、学生の大学進学をサポートします 🎯</li>
+        <li>言語サポート：学校はESL（第二言語としての英語）の補習コースを提供していません。すべてのコースは完全な英語環境で授業が行われます。学校は面接、学業成績などの側面から、学生の英語能力と授業環境への適応力を総合的に評価します 🗣️</li>
+        <li>新入生必須履修コース：1年目は英語、数学、第二外国語、歴史の4つのコアコースが必修となります 📚</li>
+        <li>履修アドバイス：新入生の1年目は、コアコースとともに美術系など学術的な負担が少ないコースを組み合わせて履修し、アメリカの高校の学業リズムにスムーズに適応することを推奨します 🎨</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🏆 二、Honorsコース一覧</h3>
+      <p>Honors英語、Honors数学、Honors生物学、Honors化学、Honors歴史、Honors外国語シリーズコース、Pinnacle上級特色コース</p>
+    </div>
+    <div class="content-block">
+      <h3>🎓 三、卒業単位要件</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">総単位要件</div>
+          <div class="card-body">最低22単位</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <div class="card-title">英語</div>
+          <div class="card-body">4単位</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧮</div>
+          <div class="card-title">数学</div>
+          <div class="card-body">3単位</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔬</div>
+          <div class="card-title">自然科学</div>
+          <div class="card-body">3単位</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">社会科学</div>
+          <div class="card-body">3単位</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗣️</div>
+          <div class="card-title">第二外国語</div>
+          <div class="card-body">2単位</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">芸術</div>
+          <div class="card-body">2単位</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏃</div>
+          <div class="card-title">健康・体育</div>
+          <div class="card-body">1単位</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📚 四、キャンパス学術リソース</h3>
+      <ul>
+        <li>学校図書館開館時間：<strong>毎日8:00～17:00</strong>，自習スペース、図書貸出、学術資料の検索などのサービスを提供しています 📖</li>
+        <li>放課後補習：学校は放課後の学業補習サポートを提供しており、学生は必要に応じて各科目の補習を予約することができます 📝</li>
+        <li>学生リーダーシップの機会：学校には12年生Prefects（生徒代表）、学生健康相談チーム（SWAT）など、豊富な学生リーダーシップポジションが用意されており、学生の全面的な発展をサポートします 🚀</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🎓 五、大学進路指導</h3>
+      <ul>
+        <li>スタッフ体制：学校の大学進路指導室（College Counseling）には、専属の進路カウンセラーが3人常駐し、学生の大学進学計画を全過程でサポートします 🧑🏫</li>
+        <li>サービススケジュール：10年生から学生と1対1の専属サポートを開始し、11年生からは定期的な進路計画ミーティングを実施、12年生では大学出願の全プロセスにわたる専属ガイダンスを提供します ✍️</li>
+        <li>進学実績：本校の進学実績は非常に優れており、毎年多くの学生が全米トップ20の大学やアイビーリーグに進学しています。また、毎年多くの学生アスリートがNCAA D1、D2、D3レベルの大学に進学し、スポーツと学業を両立させています 🥇</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 04 キャンパスライフとクラブ -->
+  <div id="ja-campus" class="section">
+    <div class="section-header"><div class="section-num">04</div><div class="section-titles"><h2>🎨 キャンパスライフとクラブ</h2><div class="section-subtitle">Campus Life & Clubs</div></div></div>
+    <div class="content-block">
+      <h3>🕒 一、キャンパス日常スケジュール</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⏰</div>
+          <div class="card-title">授業時間</div>
+          <div class="card-body">8:00-15:00、授業間休憩5分</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍽️</div>
+          <div class="card-title">昼食時間</div>
+          <div class="card-body">50分、毎日メニュー更新</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥗</div>
+          <div class="card-title">食事特色</div>
+          <div class="card-body">国際料理デー、ベジタリアン/グルテンフリー対応</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎭 二、公式芸術とイベント体系</h3>
+      <p>学校は学生の全面的な発展を奨励しており、学生アスリートでも演劇の舞台出演やバンドの演奏などの芸術プログラムに同時に参加することができ、スポーツと芸術の発展が互いに衝突することはありません 🎵⚽。</p>
+      <ul>
+        <li>中学部：毎年ミュージカル公演を定例開催しており、非常に高い人気を誇っています。人気の高い役については、複数の学生がシーンごとに分けて演じることもあります。豊富なクラブ活動体系も完備されています 🎶</li>
+        <li>高校部：毎年視覚芸術・舞台芸術展、個人レッスン音楽発表会、ダンスカンパニー公演、演劇・ミュージカル公演などの芸術イベントを開催しています 🎨</li>
+        <li>年間恒例イベント：3年生凧作りイベント、4年生ツリーハウスプロジェクト、キャンパスブックフェア、全校アースデーイベント、ブルー&ホワイトウィーク/デー、祖父母・スペシャルフレンドの日、Berwickイノベーションフェスティバルなどがあります 🎪</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🧩 三、公式クラブ一覧</h3>
+      <h4>📝 学術系クラブ</h4>
+      <p>数学競技クラブ、サイエンスオリンピアド、ディベートクラブ、スピーチクラブ、アカデミックボウル、プログラミングクラブ、ライティングクラブ、歴史クラブ、ロボティクスクラブ 🤖</p>
+      <h4>🎨 芸術系クラブ</h4>
+      <p>合唱団、バンド、演劇クラブ、ダンスクラブ、視覚芸術クラブ、写真クラブ、ハンドメイドクラブ、映画クラブ、ファッションデザインクラブ 📸</p>
+      <h4>🤝 ボランティア・サービス系クラブ</h4>
+      <p>地域サービスクラブ、ボランティア連合、環境保護クラブ、チャリティークラブ、動物保護クラブ、キャンパスサービスクラブ、国際支援クラブ 🌱</p>
+      <h4>🌍 文化系クラブ</h4>
+      <p>中国文化クラブ、ヨーロッパ文化クラブ、多文化クラブ、国際学生協会、言語交流クラブ 🗣️</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 四、クラブ活動について</h3>
+      <ol>
+        <li>クラブ新入生募集：学期開始から約1か月後に、1週間にわたるクラブ新歓イベントが開催されます。全学生が自由に申し込み、参加することができます 📣</li>
+        <li>特色クラブ：中国文化クラブは、中国やアジアからの国際学生に文化交流や祝祭イベントのための専用のプラットフォームを提供しており、新入生がキャンパスに早く馴染むための最適な場所の一つです 🎑；演劇クラブは毎年約5回の正式な舞台公演を開催しており、経験の有無に関わらず、全学生の参加を歓迎しています 🎭</li>
+        <li>地域サービス：学校には地域サービスの必須時間要件はありません。学生は自身の興味に応じて、学内外の地域サービスプロジェクトに自主的に参加することができます 🧑🤝🧑</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📅 五、学年公式アカデミックカレンダー</h3>
+      <p>学年公式アカデミックカレンダーは、入学後に学校から公式に配布されます。学期の開始/終了日、休暇スケジュール、試験週間、キャンパスの重要イベント、活動スケジュールなどの核心的な情報がすべて含まれています。入学後は、学校公式ウェブサイト、入学通知メール、学生専用ポータルから最新版の公式カレンダーをリアルタイムで確認し、学業と予定を事前に計画することができます。</p>
+    </div>
+  </div>
+  <!-- 05 体育と部活動 -->
+  <div id="ja-athletics" class="section">
+    <div class="section-header"><div class="section-num">05</div><div class="section-titles"><h2>⚽ 体育と部活動</h2><div class="section-subtitle">Athletics</div></div></div>
+    <div class="content-block">
+      <h4>🐶 公式スポーツブランド：Berwick Bulldogs</h4>
+      <p>スポーツはBerwick Academyのキャンパスカルチャーの核心的な部分を占めています。学校は健全な競争理念を掲げ、学生がスポーツの分野で自分自身に挑戦し、才能を輝かせることを奨励しています 💪。毎日放課後には定例の練習があり、ほとんどのコーチは学校の正規教員を兼任しており、学生の学業とスポーツの両立を非常に重要視しています 📚⚽。</p>
+    </div>
+    <div class="content-block">
+      <h3>🏆 一、全スポーツプログラム一覧</h3>
+      <h4>🍂 秋季シーズン バーシティ/JVチーム</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚽</div>
+          <div class="card-title">男子種目</div>
+          <div class="card-body">サッカー、クロスカントリー、ゴルフ</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏐</div>
+          <div class="card-title">女子種目</div>
+          <div class="card-body">サッカー、クロスカントリー、バレーボール</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">シーズン期間</div>
+          <div class="card-body">9月～11月</div>
+        </div>
+      </div>
+      <h4>⛄ 冬季シーズン バーシティ/JVチーム</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏀</div>
+          <div class="card-title">男子種目</div>
+          <div class="card-body">バスケットボール、レスリング</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏊‍♀️</div>
+          <div class="card-title">女子種目</div>
+          <div class="card-body">バスケットボール、水泳</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">シーズン期間</div>
+          <div class="card-body">12月～2月</div>
+        </div>
+      </div>
+      <h4>🌸 春季シーズン バーシティ/JVチーム</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚾</div>
+          <div class="card-title">男子種目</div>
+          <div class="card-body">野球、テニス、陸上競技</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥎</div>
+          <div class="card-title">女子種目</div>
+          <div class="card-body">ソフトボール、テニス、陸上競技</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">シーズン期間</div>
+          <div class="card-body">3月～5月</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎉 二、キャンパススポーツカルチャー</h3>
+      <ul>
+        <li>公式大学進学ルート：毎年多くの学生アスリートがNCAA D1、D2、D3レベルの大学に進学し、スポーツと学業を両立させた学生生活を続けています。学校はスポーツ特待生向けの完全な進学サポートを提供しています 🎓</li>
+        <li>試合の雰囲気：ホームゲームでは、多くの在校生が会場に駆けつけて応援します。アウェーゲームでは、学生の保護者が自発的にチームのために食事を提供することも多く、非常に温かい雰囲気があります 🧑👩👧👦</li>
+        <li>国際学生にとってのメリット：スポーツは、国際学生がキャンパスに早く馴染むための最良の方法の一つです。スポーツの現場では言葉の壁を越えたコミュニケーションが可能であり、ネイティブの英語スラングを学び、深い友情を築くための最高の機会にもなります 🤝</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"私は学校のサッカー、野球、テニスのチームに所属しています。スポーツのおかげで、チームメイトとすぐに本当の友情を築くことができました。試合中にはたくさんのスラングが使われるので、それは授業では絶対に学べないことですし、おかげで英語がとても早く上達しました 📈。"</div>
+      <div class="quote-attr">— 現役中国人寮生</div>
+    </div>
+  </div>
+  <!-- 06 地域生活情報 -->
+  <div id="ja-local" class="section">
+    <div class="section-header"><div class="section-num">06</div><div class="section-titles"><h2>🏙️ 地域生活情報</h2><div class="section-subtitle">Local Life</div></div></div>
+    <div class="content-block">
+      <p>サウスバーウィックは、定住人口約7500人の静かなニューイングランドの町です。町内には生活に必要な施設が一通り揃っており、より充実した生活リソースは車で30分以内の範囲に集まっています。学校はボストンから北へ車で約1時間の場所にあり、交通も便利です 🚗。</p>
+    </div>
+    <div class="content-block">
+      <h3>🛒 一、日常買い物と飲食</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛍️</div>
+          <div class="card-title">日常スーパー</div>
+          <div class="card-body">Nature's Way Market / Hannaford</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍜</div>
+          <div class="card-title">飲食店</div>
+          <div class="card-body">中華・韓国・日本料理（車で30分圏内）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💸</div>
+          <div class="card-title">買い物Tips</div>
+          <div class="card-body">ニューハンプシャー州は消費税なし</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📞 二、地域の基本サービス</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏦</div>
+          <div class="card-title">銀行サービス</div>
+          <div class="card-body">M&T銀行、ローカル口座開設可</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">通信サービス</div>
+          <div class="card-body">物理SIM/eSIM選択可</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚗</div>
+          <div class="card-title">移動サポート</div>
+          <div class="card-body">寮専用車両による送迎</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎪 三、週末のイベント</h3>
+      <p>学校では、映画鑑賞、ビーチ散歩、ゴルフなどの週末の集団イベントを定期的に開催しています 🏖️⛳。また、毎年ボストンに行ってボストン・レッドソックスの野球の試合を観戦するツアーも定例で開催されており、在校生にとって一年で最も楽しみにされているイベントの一つです ⚾。</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"この町はとても静かですが、実は全然退屈しません。車で30分以内の範囲にはアジア食材スーパーも韓国焼肉屋も日本食レストランもありますし、週末のイベントも学校がたくさん用意してくれています。何より、この静かな環境のおかげで、学業やスポーツに本当に集中することができ、大きく成長できます 📈。"</div>
+      <div class="quote-attr">— 現役中国人寮生</div>
+    </div>
+  </div>
+  <!-- 07 学費と入学要件 -->
+  <div id="ja-fees" class="section">
+    <div class="section-header"><div class="section-num">07</div><div class="section-titles"><h2>💰 学費と入学要件</h2><div class="section-subtitle">Tuition & Admission</div></div></div>
+    <div class="content-block">
+      <h3>💴 一、2026-2027学年 公式学費・諸経費</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">💵</div>
+          <div class="card-title">授業料</div>
+          <div class="card-body">約年間$50,000（中高共通）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏠</div>
+          <div class="card-title">寮費</div>
+          <div class="card-body">年間$18,500（3食付き）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🩹</div>
+          <div class="card-title">保険料</div>
+          <div class="card-body">年間$1,800（必須）</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎫</div>
+          <div class="card-title">その他費用</div>
+          <div class="card-body">出願料$150、登録料$500、活動費$1,200</div>
+        </div>
+      </div>
+      <h4>📋 保険要件</h4>
+      <p>アメリカの学校が指定するキャンパス医療保険の加入が必須です 🩹。海外の保険は受け付けられません。保険は年間を通じた医療、救急外来、入院サービスをカバーします 🏥。</p>
+      <h4>💳 お支払い方法</h4>
+      <p>電信送金、クレジットカード、オンライン決済プラットフォームに対応しています。学期開始の30日前までに全額を支払う必要があります。分割払いを申請することも可能です（学校の審査が必要です）📅。</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 二、国際学生公式入学要件</h3>
+      <h4>📝 出願プロセス</h4>
+      <ol>
+        <li>オンライン出願フォームと出願料の提出</li>
+        <li>在学中の成績証明書、推薦状、個人出願エッセイの提出 ✍️</li>
+        <li>キャンパス面接の実施（オンライン/対面選択可 🎥🤝）</li>
+        <li>学校の総合審査を経て、合否結果の通知 📧</li>
+        <li>入学確定、入学保証金の支払い、I-20の申請 📄</li>
+        <li>ビザ申請、入学登録手続きの完了 ✅</li>
+      </ol>
+      <h4>🗣️ 英語能力評価について</h4>
+      <p>学校には<strong>標準化された英語試験スコアの必須要件はありません</strong>。面接での受け答え、在学中の成績証明書、個人エッセイなどの資料を通じて、学生の英語能力と全英語授業環境への適応力を総合的に評価します 🧐。</p>
+      <h4>💉 予防接種必須要件</h4>
+      <p>学生はアメリカで要求される全ての予防接種を完了している必要があります：はしか、おたふくかぜ、風疹、水痘、ジフテリア・破傷風・百日咳、B型肝炎、インフルエンザ、髄膜炎菌ワクチン。公式の予防接種証明書を提出する必要があり、要件を満たしていない場合は入学が許可されません 📄。</p>
+      <h4>📄 I-20発行ルール</h4>
+      <ul>
+        <li>入学許可通知書と入学保証金の入金確認後、10営業日以内にI-20を発行します 📧</li>
+        <li>学費と生活費を支払う能力を証明する資金証明書の提出が必須です 💵</li>
+        <li>アメリカ合衆国移民局の要件を満たす国際学生にのみ発行され、全ての出願プロセスを完了している必要があります ✅</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 08 ビザと健康安全 -->
+  <div id="ja-visa" class="section">
+    <div class="section-header"><div class="section-num">08</div><div class="section-titles"><h2>🆔 ビザと健康安全</h2><div class="section-subtitle">Visa & Health Safety</div></div></div>
+    <div class="content-block">
+      <h3>📄 一、ビザとコンプライアンスサポート</h3>
+      <h4>🌍 国際学生専用担当窓口</h4>
+      <p>在学中の全ての問題については、専属担当者の<strong>Ms. Gabarro</strong>までご連絡ください。メールアドレス：mgabarro@berwickacademy.org 📧</p>
+      <h4>🆔 F1ビザサービス</h4>
+      <p>学校にはF1学生ビザ関連業務の専任担当者が常駐しており、SEVIS情報の更新、I-20書類の管理、休暇中の入出国に必要な書類サポートなどを行っています。SEVIS情報は毎年夏休みに一括更新され、学校から学生に事前に手続きの案内が通知されます 📅。</p>
+    </div>
+    <div class="content-block">
+      <h3>🩹 二、健康安全公式サービス</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏥</div>
+          <div class="card-title">ヘルスセンター</div>
+          <div class="card-body">月～金 8:00-18:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <div class="card-title">心理カウンセリング</div>
+          <div class="card-body">無料1対1、月～金 9:00-17:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">緊急対応</div>
+          <div class="card-body">24時間警備+ワンタッチアラーム</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">緊急ホットライン</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 09 保護者様向け窓口 -->
+  <div id="ja-parent" class="section">
+    <div class="section-header"><div class="section-num">09</div><div class="section-titles"><h2>📞 保護者様向け窓口</h2><div class="section-subtitle">Parent Communication</div></div></div>
+    <div class="content-block">
+      <h3>🤝 一、保護者面談のご案内</h3>
+      <ul>
+        <li>学期中保護者面談：学年に2回開催され、オンラインと対面の両方の形式で実施されます 🎥🤝</li>
+        <li>卒業進学特別保護者面談：卒業学年の春学期に開催され、大学進学に関する専用の進路指導のご相談に対応します 🎓</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🔐 二、保護者専用ポータル</h3>
+      <p>学校専用の保護者向けオンラインポータルでは、お子様の在学中の成績、出席状況、キャンパスからのお知らせ、宿題の予定、お支払い記録などをリアルタイムで確認することができ、お子様の学校での成長状況を常に把握することができます 📊📈。</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 三、学校からのお知らせシステム</h3>
+      <p>メール、SMS、保護者専用アプリの3つのルートからお知らせを配信するシステムを導入しています 📧📱。キャンパスイベント、休暇スケジュール、緊急通知、学業に関するリマインダーなど、あらゆる情報を網羅しており、ご家庭と学校の情報連携を確実に行うことができます 🤝。</p>
+    </div>
+    <div class="content-block">
+      <h3>🌍 四、国際学生保護者様専用サービス</h3>
+      <p>キャンパス見学のご案内、寮生活に関するご相談、地域生活に関するガイダンスを提供しています 🗺️。国際学生の保護者様専用の担当者を配置しており、ご連絡やご相談、ご家庭と学校の連携に関するサポートを全過程でご提供します 🧑🏫。</p>
+    </div>
+  </div>
+  <!-- 10 おわりにと付録 -->
+  <div id="ja-ending" class="section">
+    <div class="section-header"><div class="section-num">10</div><div class="section-titles"><h2>📎 おわりにと付録</h2><div class="section-subtitle">Final Words & Appendix</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academyへようこそ 🎉。200年以上の歴史を持つ本校は、質の高い学術教育を提供するだけでなく、温かく、成長に満ちた留学生活をあなたに提供します 💛。</p>
+      <p style="margin-top: 16px;">本ハンドブックの寮生活体験談は、全て現在在籍している国際学生の実体験と生の情報に基づいています ✨。公式情報はBerwick Academyの公式サイトより引用しており、あなたがこの地での生活に早く馴染み、遠回りをせずに過ごせるようにという思いで作成されています。異国の地に来て、見知らぬ環境に不安を感じるのはごく自然なことです。自分にプレッシャーをかけすぎる必要はありません 😌。</p>
+      <p style="margin-top: 16px;">学校の国際学生オフィス、ハウスペアレント、担当教員、そしてここで先に学生生活を送っている先輩たちは、あなたが困ったときにいつでも助けを求められる存在です 🤝。Berwick Academyでの日々が、学業での成果を上げ、本物の友情を育み、より広い世界を見て、より良い自分自身になるための素晴らしい時間となりますように 💪！</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"ここは完璧な場所ではありませんが、あなたが想像もしなかったほどの成長を必ず与えてくれる場所です 📈。少し勇気を出して、いろいろなことに挑戦し、人と交流し、新しい体験をしてみてください。きっとこの場所が好きになるはずです 💖。"</div>
+      <div class="quote-attr">— 在籍中の全ての国際寮生より</div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="content-block">
+      <h3>📎 付録：緊急連絡先一覧</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">学校総合電話</div>
+          <div class="card-body">+1 (207) 384-2164</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📧</div>
+          <div class="card-title">国際学生オフィス</div>
+          <div class="card-body">international@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👩‍💼</div>
+          <div class="card-title">専属担当者</div>
+          <div class="card-body">Ms. Gabarro, mgabarro@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">24時間緊急ホットライン</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 日本語版フッター -->
+  <footer>
+    <p class="gold">Berwick Academy · グローバルブリッジプロジェクト 🌉</p>
+    <p>本ハンドブックの公式情報はBerwick Academy公式サイトより<br>体験談は現役国際寮生が執筆<br>創立 1791年 · メイン州サウスバーウィック</p>
+    <a href="#language-selector" class="switch-lang-btn">🔄 言語を切り替える</a>
+  </footer>
+</div>
 
-const root = ReactDOM.createRoot(document.getElementById('app'));
-root.render(<App />);
-</script>
-</body>
-</html>
+<!-- 한국어 완전판 핸드북【중국어 내용과 100% 완전 대응 | 이모지·카드 스타일 통일】 -->
+<div class="lang-container" id="lang-ko">
+  <!-- 표지 -->
+  <div class="cover">
+    <div class="cover-badge">🏫 Berwick Academy · 메인주 사우스버윅</div>
+    <h1 class="cover-title">📚 국제학생 생활 핸드북</h1>
+    <p class="cover-subtitle">International Student Handbook</p>
+    <div class="cover-divider"></div>
+    <p class="cover-author">공식 정보는 Berwick Academy 홈페이지에서 발췌<br>✍️ 현 기숙사 국제학생들이 공동 집필</p>
+  </div>
+  <!-- 목차【전 제목 하이퍼링크 점프·챕터 ID와 1:1 대응】 -->
+  <div class="toc">
+    <div class="toc-inner">
+      <div class="toc-label">📖 목차</div>
+      <div class="toc-items">
+        <a href="#ko-advantage" class="toc-item"><span class="toc-num">00</span><div><div class="toc-text">🏫 학교 개요와 교육 이념</div><div class="toc-en">The Berwick Advantage</div></div></a>
+        <a href="#ko-prearrival" class="toc-item"><span class="toc-num">01</span><div><div class="toc-text">✈️ 입학 전 가이드</div><div class="toc-en">Pre-Arrival Guide</div></div></a>
+        <a href="#ko-dorm" class="toc-item"><span class="toc-num">02</span><div><div class="toc-text">🏠 기숙사 생활</div><div class="toc-en">Dorm Life</div></div></a>
+        <a href="#ko-academics" class="toc-item"><span class="toc-num">03</span><div><div class="toc-text">📝 학업과 진로 지도</div><div class="toc-en">Academics & Counseling</div></div></a>
+        <a href="#ko-campus" class="toc-item"><span class="toc-num">04</span><div><div class="toc-text">🎨 캠퍼스 라이프와 동아리</div><div class="toc-en">Campus Life & Clubs</div></div></a>
+        <a href="#ko-athletics" class="toc-item"><span class="toc-num">05</span><div><div class="toc-text">⚽ 체육과 스포츠 팀</div><div class="toc-en">Athletics</div></div></a>
+        <a href="#ko-local" class="toc-item"><span class="toc-num">06</span><div><div class="toc-text">🏙️ 지역 생활 정보</div><div class="toc-en">Local Life</div></div></a>
+        <a href="#ko-fees" class="toc-item"><span class="toc-num">07</span><div><div class="toc-text">💰 학비와 입학 요건</div><div class="toc-en">Tuition & Admission</div></div></a>
+        <a href="#ko-visa" class="toc-item"><span class="toc-num">08</span><div><div class="toc-text">🆔 비자와 건강 안전</div><div class="toc-en">Visa & Health Safety</div></div></a>
+        <a href="#ko-parent" class="toc-item"><span class="toc-num">09</span><div><div class="toc-text">📞 학부모 소통 채널</div><div class="toc-en">Parent Communication</div></div></a>
+        <a href="#ko-ending" class="toc-item"><span class="toc-num">10</span><div><div class="toc-text">📎 마무리와 부록</div><div class="toc-en">Final & Appendix</div></div></a>
+      </div>
+    </div>
+  </div>
+  <!-- 00 학교 개요와 교육 이념 -->
+  <div id="ko-advantage" class="section">
+    <div class="section-header"><div class="section-num">00</div><div class="section-titles"><h2>🏫 학교 개요와 교육 이념</h2><div class="section-subtitle">The Berwick Advantage</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academy는 1791년 존 핸콕이 창립 미션에 서명한 미국 뉴잉글랜드 지역에서 가장 오랜 역사를 가진 사립 대학 예비학교 중 하나입니다. 「미덕과 실용적인 지식」을 교육 이념으로 삼아, 200년 이상 고품질의 엘리트 교육을 지속적으로 제공해 왔습니다 🎓.</p>
+    </div>
+    <div class="content-block">
+      <h3>👨🏫 교직원의 5대 핵심 약속</h3>
+      <ol>
+        <li>풍부한 과목 선택을 제공할 수 있는 충분한 규모이면서, 개인 맞춤형 학습 경험을 제공할 수 있는 소규모 체계를 유지합니다</li>
+        <li>복잡하고 빠르게 변화하는 세상에서 학생 본인의 성공과 인생 목표를 찾을 수 있도록 전과정에서 지원합니다</li>
+        <li>대학 진학을 위한 학업 준비를 완벽히 지원하고, 스스로의 기대를 뛰어넘는 성장을 이끌어냅니다</li>
+        <li>건전한 경쟁 문화를 통해 스포츠와 예술 분야에서 학생의 고유한 재능을 빛나게 합니다</li>
+        <li>다양한 실천 기회로 시야를 넓히고 탁월함을 추구하며, 학생만의 잠재력을 최대한 이끌어냅니다</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📊 학교 공식 핵심 데이터</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">설립년도</div>
+          <div class="card-body">1791년</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏞️</div>
+          <div class="card-title">캠퍼스 면적</div>
+          <div class="card-body">80에이커</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👥</div>
+          <div class="card-title">총 재학생 수</div>
+          <div class="card-body">520명 (Pre-K~12학년)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">학생 교사 비율</div>
+          <div class="card-body">8:1 엘리트 소규모 수업</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <div class="card-title">국제학생 비율</div>
+          <div class="card-body">약 5%</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <div class="card-title">위치</div>
+          <div class="card-body">보스턴 북쪽 차로 약 1시간</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">통학 권역</div>
+          <div class="card-body">전미 85개 커뮤니티, 25개 스쿨버스 노선</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💴</div>
+          <div class="card-title">장학금 지원</div>
+          <div class="card-body">재학생 41%가 수요 기반 장학금 수령</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 01 입학 전 가이드 -->
+  <div id="ko-prearrival" class="section">
+    <div class="section-header"><div class="section-num">01</div><div class="section-titles"><h2>✈️ 입학 전 가이드</h2><div class="section-subtitle">Pre-Arrival Guide</div></div></div>
+    <div class="content-block">
+      <p>본 장은 미국 입국 전 국제학생을 위한 핵심 준비 가이드로, 학교 공식 규정과 현 기숙사 학생들의 실제 경험을 결합하여 불필요한 시행착오를 피할 수 있도록 돕습니다 🚫❌.</p>
+    </div>
+    <div class="content-block">
+      <h3>🛬 1. 도착과 교통 수단</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">✈️</div>
+          <div class="card-title">추천 공항</div>
+          <div class="card-body">보스턴 로건 국제공항 (BOS)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <div class="card-title">추천 교통</div>
+          <div class="card-body">C&J 버스로 Dover/Portsmouth 직행</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">입주 마감</div>
+          <div class="card-body">학기 시작 1일 전</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎒 2. 필수 소지품 목록</h3>
+      <ol>
+        <li><strong>생활 필수품</strong>：침구류 (학교는 기본 매트리스만 제공하며, 시트·이불커버·베개커버·이불 등은 직접 준비해야 합니다)；110V 이외 전압 국가에서 오는 학생은 반드시 미국 표준 변환 플러그를 소지해야 합니다 🔌</li>
+        <li><strong>개인 용품</strong>：향수병을 달래기 위해 고향의 조미료·간식 등을 소지하는 것을 추천합니다 🥘🍬；상시 복용하는 약이 있는 경우, 영문 설명서와 유효한 처방전을 함께 소지해야 합니다 💊</li>
+        <li><strong>중요 서류</strong>：I-20 원본, 예방접종 증명서, 입학 허가서, 여권 및 비자 사본 등 핵심 서류는 반드시 휴대 수하물에 넣어 소지하고, 위탁 수하물에 넣지 마십시오 📄</li>
+      </ol>
+    </div>
+  </div>
+  <!-- 02 기숙사 생활 -->
+  <div id="ko-dorm" class="section">
+    <div class="section-header"><div class="section-num">02</div><div class="section-titles"><h2>🏠 기숙사 생활</h2><div class="section-subtitle">Dorm Life</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academy는 고등학교 기숙사 학생 전용 단독주택형 기숙사를 제공하며, 이는 본교 Hilltop 캠퍼스 라이프의 핵심 구성 요소입니다 🏡.</p>
+    </div>
+    <div class="content-block">
+      <h3>🛏️ 1. 객실과 부대 시설</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛏️</div>
+          <div class="card-title">객실 구성</div>
+          <div class="card-body">2층 단독 건물, 총 6실 (1/2/3인실), 객실별 전용 욕실</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍳</div>
+          <div class="card-title">주방 시설</div>
+          <div class="card-body">냉장고·전자레인지·조리기구·식기세척기 완비</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">공용 구역</div>
+          <div class="card-body">무료 세탁실, TV+PS5 구비 공용 라운지</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">전자기기</div>
+          <div class="card-body">사용 제한 없음</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🔢 2. 객실 배정 규칙</h3>
+      <p>객실은 <strong>기숙사 거주 연수 우선 제도</strong>로 배정됩니다. 학교에서의 기숙사 거주 기간이 길수록 객실 선택 우선순위가 높아집니다. 국제학생이 현지 국내 학생과 룸메이트를 신청하는 것도 가능합니다 🤝.</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 3. 일상 관리와 규칙</h3>
+      <ul>
+        <li>식사 제공：매일 저녁 18시에 학교 식당에서 기숙사로 저녁식사가 배달되며, 모든 기숙사 학생이 프론트 홀에서 함께 식사합니다 🍽️</li>
+        <li>스케줄과 통행금지：평일 밤 23시 소등하며, 다른 사람에게 방해가 되지 않는 조용한 활동만 허용됩니다. 주말 통행금지 규칙은 평일보다 완화되어 있습니다 ⏰</li>
+        <li>배달과 택배：기숙사에서 일반 음식 배달과 택배 수령이 정상적으로 가능합니다 📦🍕</li>
+        <li>방문객 관리：교외 친구·방문객을 기숙사에 데려오려면 사전에 정식 신청을 제출해야 하며, 허가가 떨어진 후에만 출입이 허용됩니다 🚪</li>
+        <li>공용 구역 관리：모든 기숙사 학생이 번갈아가며 공용 구역 청소 당번을 맡아 함께 생활 환경을 유지합니다 🧹</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>👨👩👧👦 4. 하우스 페어런트와 안전 보장</h3>
+      <ul>
+        <li>기숙사에는 총 5명의 하우스 페어런트(기숙사 사감)가 상주하며, 그 중 3명은 기숙사 건물에서 학생과 함께 거주하고, 나머지 2-3명은 학교 주변에 거주합니다. 각 사감마다 스타일의 차이는 있지만, 모두 학생의 안전과 필요를 최우선으로 생각하며, 문제가 생겼을 때 언제든지 도움을 요청할 수 있습니다 🆘</li>
+        <li>외출 관리：기숙사를 떠날 때마다 학교 웹 시스템에서 외출 등록을 완료해야 합니다. 학부모와 교사는 학생의 행방 기록을 실시간으로 확인할 수 있어 전면적인 안전을 보장합니다 📍</li>
+        <li>건강 지원：학교에는 일반 질병을 다루는 헬스 센터와 스포츠 부상을 다루는 전문 운동 트레이너실이 설치되어 있습니다. 증상이 심한 경우, 사감이 즉시 학생과 동행하여 병원 진료를 받도록 합니다 🏥</li>
+        <li>공식 건강 지원 체계：학교에는 학생 건강 상담 팀(SWAT)이 운영되고 있어 모든 학생에게 종합적인 건강 및 심리 지원을 제공합니다 🧠</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"기숙사 생활이 처음이라 정말 긴장했어요. 룸메이트가 있는 것, 정해진 저녁 식사 시간이 있는 것, 모든 게 낯설었거든요. 하지만 함께 PS5로 게임하고 스포츠 팀에 들어가면서 금방 적응했어요. 다른 의견이 있으면 그냥 솔직히 말하면 룸메이트들은 모두 이해해주고, 정말 모두 친절해요 💛."</div>
+      <div class="quote-attr">— 현 재학 중인 중국인 기숙사 학생</div>
+    </div>
+  </div>
+  <!-- 03 학업과 진로 지도 -->
+  <div id="ko-academics" class="section">
+    <div class="section-header"><div class="section-num">03</div><div class="section-titles"><h2>📝 학업과 진로 지도</h2><div class="section-subtitle">Academics & Counseling</div></div></div>
+    <div class="content-block">
+      <h4>📚 공식 학습 프레임워크：Pathway of a Learner</h4>
+      <p>Berwick Academy에서 학습이란 체크리스트가 아니라 완전한 성장의 여정입니다. 「미덕과 실용적인 지식」이라는 핵심 미션을 바탕으로, Pre-K부터 12학년까지 Pathway of a Learner 프레임워크를 구축했습니다. 초등·중등·고등 3단계로 나뉘어 학생의 호기심, 자신감, 인성을 전 학업 과정에서 일관되게 키우는 것을 중시합니다 🧠💪.</p>
+    </div>
+    <div class="content-block">
+      <h3>📖 1. 과목과 수강 가이드</h3>
+      <ul>
+        <li><strong>공식 특화 과정 - Pinnacle Courses</strong>：고등부 전용 고급 과정으로, 실제 세계의 문제와 아이디어를 다루고 배운 지식을 의미 있는 방식으로 적용하는 것을 목표로 하는 본교 학술 시스템의 핵심 특화 과정입니다 🚀</li>
+        <li><strong>제작 스튜디오 - Fabrication Studio</strong>：본교 전용 캠퍼스 내 메이커 스페이스로, 고등학생의 문제 해결 능력과 실천적 혁신 역량을 기릅니다 🛠️</li>
+        <li>커리큘럼 체계：본교는 <strong>AP 과정을 제공하지 않습니다</strong>. 하지만 AP 과정과 동등한 학업적 난이도를 가진 고급 Honors 과정을 개설하여, 최상위 대학 예비 프로그램의 학업 요건을 충족하고 학생의 대학 입학 목표를 지원합니다 🎯</li>
+        <li>언어 지원：본교는 ESL(제2외국어로서의 영어) 보충 과정을 제공하지 않습니다. 모든 과정은 완전한 영어 환경에서 진행되며, 학교는 면접·학업 성적 등 다양한 측면에서 학생의 영어 능력과 전 영어 학습 환경에 대한 적응력을 종합적으로 평가합니다 🗣️</li>
+        <li>신입생 필수 수강 과목：고등학교 1학년 신입생은 영어, 수학, 제2외국어, 역사 4대 핵심 과목이 필수입니다 📚</li>
+        <li>수강 조언：신입생은 1학년차에 핵심 과목과 함께 미술 계열 등 학업적 부담이 적은 과목을 병행하여 수강하고, 미국 고등학교의 학업 리듬에 부드럽게 적응하는 것을 추천합니다 🎨</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🏆 2. Honors 고급 과정 목록</h3>
+      <p>Honors 영어, Honors 수학, Honors 생물학, Honors 화학, Honors 역사, Honors 외국어 시리즈, Pinnacle 고급 특화 과정</p>
+    </div>
+    <div class="content-block">
+      <h3>🎓 3. 졸업 학점 요건</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">총 학점 요건</div>
+          <div class="card-body">최소 22학점</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <div class="card-title">영어</div>
+          <div class="card-body">4학점</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧮</div>
+          <div class="card-title">수학</div>
+          <div class="card-body">3학점</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔬</div>
+          <div class="card-title">자연과학</div>
+          <div class="card-body">3학점</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">사회과학</div>
+          <div class="card-body">3학점</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗣️</div>
+          <div class="card-title">제2외국어</div>
+          <div class="card-body">2학점</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">예술</div>
+          <div class="card-body">2학점</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏃</div>
+          <div class="card-title">건강·체육</div>
+          <div class="card-body">1학점</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📚 4. 캠퍼스 학술 리소스</h3>
+      <ul>
+        <li>학교 도서관 개방 시간：<strong>매일 8:00~17:00</strong>，자습 공간, 도서 대출, 학술 자료 검색 등의 서비스를 제공합니다 📖</li>
+        <li>방과 후 보충 수업：학교는 방과 후 학업 보충 지원을 제공하며, 학생은 필요에 따라 각 과목의 보충 수업을 예약할 수 있습니다 📝</li>
+        <li>학생 리더십 기회：학교에는 12학년 학생 대표(Prefects), 학생 건강 상담 팀(SWAT) 등 풍부한 학생 리더십 포지션이 마련되어 있어 학생의 전면적인 발전을 지원합니다 🚀</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🎓 5. 대학 진로 지도</h3>
+      <ul>
+        <li>인력 구성：학교 진로 지도 센터에는 전담 진로 컨설턴트 3명이 상주하며, 학생의 대학 입학 계획을 전 과정에서 지원합니다 🧑🏫</li>
+        <li>서비스 일정：10학년부터 학생과 1:1 전담 지원을 시작하고, 11학년부터 정기적인 진로 계획 미팅을 진행하며, 12학년에는 대학 원서 접수 전 과정에 대한 전담 가이드를 제공합니다 ✍️</li>
+        <li>진학 실적：본교는 매년 다수의 학생이 미 전국 TOP 20 대학과 아이비 리그에 입학하는 우수한 진학 실적을 보유하고 있습니다. 또한 매년 많은 학생 선수가 NCAA D1·D2·D3 레벨 대학에 진학하여 스포츠와 학업을 이어갑니다 🥇</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 04 캠퍼스 라이프와 동아리 -->
+  <div id="ko-campus" class="section">
+    <div class="section-header"><div class="section-num">04</div><div class="section-titles"><h2>🎨 캠퍼스 라이프와 동아리</h2><div class="section-subtitle">Campus Life & Clubs</div></div></div>
+    <div class="content-block">
+      <h3>🕒 1. 캠퍼스 일상 스케줄</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⏰</div>
+          <div class="card-title">수업 시간</div>
+          <div class="card-body">매일 8:00~15:00, 수업 간 휴식 5분</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍽️</div>
+          <div class="card-title">점심 시간</div>
+          <div class="card-body">50분, 매일 메뉴 업데이트</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥗</div>
+          <div class="card-title">식사 특징</div>
+          <div class="card-body">세계 음식 데이, 채식·글루텐 프리 메뉴 상시 제공</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎭 2. 공식 예술·이벤트 체계</h3>
+      <p>학교는 학생의 전면적인 발전을 장려하며, 학생 선수도 연극 무대 공연, 밴드 연주 등 모든 예술 프로그램에 동시에 참여할 수 있어 스포츠와 예술 발전이 서로 충돌하지 않습니다 🎵⚽.</p>
+      <ul>
+        <li>중등부：매년 정기적으로 뮤지컬 공연을 개최하며 참여율이 매우 높습니다. 인기 있는 역할은 여러 학생이 나누어 공연하기도 하며, 풍부한 동아리 활동 체계도 완비되어 있습니다 🎶</li>
+        <li>고등부：매년 시각·공연 예술 전시, 개인 음악 레슨 발표회, 댄스단 공연, 연극·뮤지컬 공연 등 다양한 예술 행사를 개최합니다 🎨</li>
+        <li>연간 정기 행사：3학년 연 만들기 프로젝트, 4학년 트리하우스 프로젝트, 캠퍼스 북페어, 전교 어스데이 행사, 블루&화이트 위크/데이, 조부모·특별 친구의 날, Berwick 혁신 페스티벌 등이 있습니다 🎪</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🧩 3. 공식 동아리 전체 목록</h3>
+      <h4>📝 학술계 동아리</h4>
+      <p>수학 경시 동아리, 사이언스 올림피아드, 토론 동아리, 연설 동아리, 아카데믹 볼, 프로그래밍 동아리, 글쓰기 동아리, 역사 동아리, 로보틱스 동아리 🤖</p>
+      <h4>🎨 예술계 동아리</h4>
+      <p>합창단, 밴드, 연극 동아리, 댄스 동아리, 시각 예술 동아리, 사진 동아리, 수공예 동아리, 영화 동아리, 패션 디자인 동아리 📸</p>
+      <h4>🤝 봉사계 동아리</h4>
+      <p>지역 봉사 동아리, 자원봉사 연합, 환경 보호 동아리, 자선 동아리, 동물 보호 동아리, 캠퍼스 봉사 동아리, 국제 지원 동아리 🌱</p>
+      <h4>🌍 문화계 동아리</h4>
+      <p>중국 문화 동아리, 유럽 문화 동아리, 다문화 동아리, 국제학생 협회, 언어 교류 동아리 🗣️</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 4. 동아리 활동 안내</h3>
+      <ol>
+        <li>동아리 신입생 모집：학기 시작 후 약 1개월 후, 1주일간 동아리 박람회가 개최되며 모든 학생이 자유롭게 신청하고 참여할 수 있습니다 📣</li>
+        <li>특색 동아리：중국 문화 동아리는 중국·아시아 국제학생에게 문화 교류와 명절 행사를 위한 전용 플랫폼을 제공하며, 신입생이 캠퍼스에 빠르게 적응할 수 있는 최적의 채널 중 하나입니다 🎑；연극 동아리는 매년 약 5회의 정식 무대 공연을 개최하며, 경험 유무에 관계없이 모든 학생의 참여를 환영합니다 🎭</li>
+        <li>지역 봉사：학교에는 봉사 시간 의무 요건이 없습니다. 학생은 개인의 관심에 따라 자발적으로 교내외 봉사 프로젝트에 참여할 수 있습니다 🧑🤝🧑</li>
+      </ol>
+    </div>
+    <div class="content-block">
+      <h3>📅 5. 학년 공식 학사 달력</h3>
+      <p>학년 공식 학사 달력은 입학 후 학교에서 정식으로 배포됩니다. 학기 시작·종료일, 휴가 일정, 시험 주간, 캠퍼스 주요 행사, 대회 일정 등 모든 핵심 정보가 포함되어 있습니다. 입학 후 신입생은 학교 공식 홈페이지, 입학 통지 메일, 학생 전용 포털에서 최신 버전의 공식 학사 달력을 실시간으로 확인하고 학업과 일정을 미리 계획할 수 있습니다.</p>
+    </div>
+  </div>
+  <!-- 05 체육과 스포츠 팀 -->
+  <div id="ko-athletics" class="section">
+    <div class="section-header"><div class="section-num">05</div><div class="section-titles"><h2>⚽ 체육과 스포츠 팀</h2><div class="section-subtitle">Athletics</div></div></div>
+    <div class="content-block">
+      <h4>🐶 공식 스포츠 브랜드：Berwick Bulldogs</h4>
+      <p>스포츠는 Berwick Academy 캠퍼스 문화의 핵심 구성 요소입니다. 학교는 건전한 경쟁 이념을 바탕으로 학생이 스포츠 분야에서 자신에게 도전하고 재능을 빛나게 하는 것을 장려합니다 💪. 매일 방과 후 정기 훈련이 진행되며, 대부분의 코치는 학교 정규 교직원이 겸임하고 있어 학생의 학업과 스포츠의 균형 발전을 매우 중요하게 생각합니다 📚⚽.</p>
+    </div>
+    <div class="content-block">
+      <h3>🏆 1. 전체 스포츠 종목</h3>
+      <h4>🍂 가을 시즌 Varsity/JV 팀</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚽</div>
+          <div class="card-title">남자 종목</div>
+          <div class="card-body">축구, 크로스컨트리, 골프</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏐</div>
+          <div class="card-title">여자 종목</div>
+          <div class="card-body">축구, 크로스컨트리, 배구</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">시즌 기간</div>
+          <div class="card-body">9월~11월</div>
+        </div>
+      </div>
+      <h4>⛄ 겨울 시즌 Varsity/JV 팀</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏀</div>
+          <div class="card-title">남자 종목</div>
+          <div class="card-body">농구, 레슬링</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏊‍♀️</div>
+          <div class="card-title">여자 종목</div>
+          <div class="card-body">농구, 수영</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">시즌 기간</div>
+          <div class="card-body">12월~2월</div>
+        </div>
+      </div>
+      <h4>🌸 봄 시즌 Varsity/JV 팀</h4>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚾</div>
+          <div class="card-title">남자 종목</div>
+          <div class="card-body">야구, 테니스, 육상</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥎</div>
+          <div class="card-title">여자 종목</div>
+          <div class="card-body">소프트볼, 테니스, 육상</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">시즌 기간</div>
+          <div class="card-body">3월~5월</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎉 2. 캠퍼스 스포츠 문화</h3>
+      <ul>
+        <li>공식 대학 진학 루트：매년 많은 학생 선수가 NCAA D1·D2·D3 레벨 대학에 진학하여 스포츠와 학업을 이어갑니다. 학교는 체육 특기생을 위한 완벽한 진학 지원을 제공합니다 🎓</li>
+        <li>경기 분위기：홈 경기에는 많은 재학생이 경기장에 찾아와 응원하며, 원정 경기에는 학부모가 자발적으로 팀 식사를 제공하는 경우가 많아 끈끈한 커뮤니티 분위기를 형성하고 있습니다 🧑👩👧👦</li>
+        <li>국제학생 특화 장점：스포츠는 국제학생이 캠퍼스에 빠르게 적응할 수 있는 최고의 방법 중 하나입니다. 운동장에서는 언어의 장벽을 넘어 소통할 수 있으며, 현지 영어 슬랭을 배우고 깊은 우정을 쌓을 수 있는 최적의 기회이기도 합니다 🤝</li>
+      </ul>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"저는 학교 축구, 야구, 테니스 팀에 소속되어 있습니다. 스포츠 덕분에 팀 동료들과 정말 빠르게 진정한 우정을 쌓을 수 있었어요. 경기 중에 정말 많은 슬랭이 사용되는데, 이건 수업에서 절대 배울 수 없는 것이고 덕분에 영어 실력이 정말 빠르게 늘었어요 📈."</div>
+      <div class="quote-attr">— 현 재학 중인 중국인 기숙사 학생</div>
+    </div>
+  </div>
+  <!-- 06 지역 생활 정보 -->
+  <div id="ko-local" class="section">
+    <div class="section-header"><div class="section-num">06</div><div class="section-titles"><h2>🏙️ 지역 생활 정보</h2><div class="section-subtitle">Local Life</div></div></div>
+    <div class="content-block">
+      <p>사우스버윅은 상주 인구 약 7500명의 조용한 뉴잉글랜드 타운입니다. 타운 내에 생활에 필요한 시설이 모두 갖춰져 있으며, 더 풍부한 생활 인프라는 차로 30분 이내 범위에 집중되어 있습니다. 학교는 보스턴에서 북쪽으로 차로 약 1시간 거리에 위치해 교통이 편리합니다 🚗.</p>
+    </div>
+    <div class="content-block">
+      <h3>🛒 1. 일상 쇼핑과 식사</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🛍️</div>
+          <div class="card-title">일상 마트</div>
+          <div class="card-body">Nature's Way Market / Hannaford 대형 마트</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍜</div>
+          <div class="card-title">식당 옵션</div>
+          <div class="card-body">중식·한식·일식 레스토랑 (차로 30분 이내)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💸</div>
+          <div class="card-title">쇼핑 팁</div>
+          <div class="card-body">뉴햄프셔주는 소비세가 없습니다</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>📞 2. 지역 기본 서비스</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏦</div>
+          <div class="card-title">은행 서비스</div>
+          <div class="card-body">M&T 은행 지점, 현지 계좌 개설 가능</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">통신 서비스</div>
+          <div class="card-body">미국 물리적 SIM / eSIM 선택 가능</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚗</div>
+          <div class="card-title">이동 지원</div>
+          <div class="card-body">기숙사 전용 차량으로 주말 쇼핑·외출 시 동행 지원</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3>🎪 3. 주말 활동</h3>
+      <p>학교에서는 영화 관람, 해변 산책, 골프 등 주말 단체 활동을 정기적으로 개최합니다 🏖️⛳. 또한 매년 보스턴으로 보스턴 레드삭스 야구 경기 관람 투어를 정기적으로 운영하며, 이는 재학생들이 일년 중 가장 기대하는 행사 중 하나입니다 ⚾.</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"이 타운은 정말 조용하지만 전혀 지루하지 않아요. 차로 30분 이내에 아시아 마트, 한국 BBQ, 일식 레스토랑이 모두 있고, 학교에서 주말 활동도 정말 많이 준비해주세요. 무엇보다 이 조용한 환경 덕분에 학업과 스포츠에 정말 집중할 수 있고, 많이 성장할 수 있었어요 📈."</div>
+      <div class="quote-attr">— 현 재학 중인 중국인 기숙사 학생</div>
+    </div>
+  </div>
+  <!-- 07 학비와 입학 요건 -->
+  <div id="ko-fees" class="section">
+    <div class="section-header"><div class="section-num">07</div><div class="section-titles"><h2>💰 학비와 입학 요건</h2><div class="section-subtitle">Tuition & Admission</div></div></div>
+    <div class="content-block">
+      <h3>💴 1. 2026-2027학년 공식 학비 및 제반 비용</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">💵</div>
+          <div class="card-title">수업료</div>
+          <div class="card-body">연간 약 $50,000 (중고등 통일)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏠</div>
+          <div class="card-title">기숙사비</div>
+          <div class="card-body">연간 $18,500 (1일 3식 포함)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🩹</div>
+          <div class="card-title">보험료</div>
+          <div class="card-body">연간 $1,800 (필수)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎫</div>
+          <div class="card-title">기타 비용</div>
+          <div class="card-body">원서 접수비 $150, 등록비 $500, 활동비 $1,200</div>
+        </div>
+      </div>
+      <h4>📋 보험 요건</h4>
+      <p>학교가 지정한 미국 캠퍼스 의료 보험 가입이 필수입니다 🩹. 해외 보험은 인정되지 않으며, 해당 보험은 연간 외래 진료·응급 진료·입원 서비스를 전면적으로 커버합니다 🏥.</p>
+      <h4>💳 납부 방법</h4>
+      <p>전신 송금, 신용카드, 온라인 결제 플랫폼을 지원합니다. 학기 시작 30일 전까지 전액을 납부해야 하며, 학교 심사를 통과하면 분할 납부를 신청할 수 있습니다 📅.</p>
+    </div>
+    <div class="content-block">
+      <h3>📋 2. 국제학생 공식 입학 요건</h3>
+      <h4>📝 원서 접수 프로세스</h4>
+      <ol>
+        <li>온라인 원서 및 원서 접수비 제출</li>
+        <li>재학 성적 증명서, 추천서, 개인 지원 에세이 제출 ✍️</li>
+        <li>캠퍼스 인터뷰 참여 (온라인/대면 선택 가능 🎥🤝)</li>
+        <li>학교 종합 심사 후 합격 결과 통지 📧</li>
+        <li>입학 확정, 입학 보증금 납부, I-20 신청 📄</li>
+        <li>비자 신청, 입학 등록 절차 완료 ✅</li>
+      </ol>
+      <h4>🗣️ 영어 능력 평가 안내</h4>
+      <p>학교에는 <strong>표준화된 영어 시험 점수 의무 요건이 없습니다</strong>. 인터뷰 결과, 재학 성적 증명서, 개인 에세이 등 다양한 자료를 통해 학생의 영어 능력과 전 영어 수업 환경에 대한 적응력을 종합적으로 평가합니다 🧐.</p>
+      <h4>💉 예방접종 필수 요건</h4>
+      <p>학생은 미국에서 요구하는 전체 예방접종을 완료해야 합니다：홍역·유행성이하선염·풍진(MMR), 수두, 파상풍·디프테리아·백일해(Tdap), B형 간염, 인플루엔자, 수막구균 백신. 공식 예방접종 증명서를 제출해야 하며, 요건을 충족하지 않으면 입학이 허가되지 않습니다 📄.</p>
+      <h4>📄 I-20 발급 규칙</h4>
+      <ul>
+        <li>입학 허가 통지서 수령 및 입학 보증금 납부 확인 후 10영업일 이내에 I-20를 발급합니다 📧</li>
+        <li>학비와 생활비를 지불할 능력을 증명하는 자금 증명서 제출이 필수입니다 💵</li>
+        <li>미국 이민국(USCIS) 요건을 충족하는 국제학생에게만 발급되며, 모든 원서 접수 절차를 완료해야 합니다 ✅</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 08 비자와 건강 안전 -->
+  <div id="ko-visa" class="section">
+    <div class="section-header"><div class="section-num">08</div><div class="section-titles"><h2>🆔 비자와 건강 안전</h2><div class="section-subtitle">Visa & Health Safety</div></div></div>
+    <div class="content-block">
+      <h3>📄 1. 비자와 컴플라이언스 지원</h3>
+      <h4>🌍 국제학생 전담 담당자</h4>
+      <p>재학 중 발생하는 모든 관련 문제에 대해 전담 코디네이터 <strong>Ms. Gabarro</strong>에게 문의하실 수 있습니다. 이메일 주소：mgabarro@berwickacademy.org 📧</p>
+      <h4>🆔 F1 비자 서비스</h4>
+      <p>학교에는 F1 학생 비자 관련 업무를 전담하는 직원이 상주하며, SEVIS 정보 업데이트, I-20 서류 관리, 휴가 중 입출국에 필요한 서류 지원 등을 담당합니다. SEVIS 정보는 매년 여름방학에 일괄 업데이트되며, 학교에서 학생에게 사전에 절차 안내를 통지합니다 📅.</p>
+    </div>
+    <div class="content-block">
+      <h3>🩹 2. 건강 안전 공식 서비스</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🏥</div>
+          <div class="card-title">헬스 센터</div>
+          <div class="card-body">월~금 8:00~18:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <div class="card-title">심리 상담</div>
+          <div class="card-body">무료 1:1 상담, 월~금 9:00~17:00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">긴급 대응</div>
+          <div class="card-body">24시간 경비 순찰 + 원터치 알람 시스템</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">긴급 핫라인</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 09 학부모 소통 채널 -->
+  <div id="ko-parent" class="section">
+    <div class="section-header"><div class="section-num">09</div><div class="section-titles"><h2>📞 학부모 소통 채널</h2><div class="section-subtitle">Parent Communication</div></div></div>
+    <div class="content-block">
+      <h3>🤝 1. 학부모 면담 일정</h3>
+      <ul>
+        <li>학기 중 학부모 면담：학년당 2회 개최되며, 온라인과 대면 두 가지 형식으로 진행됩니다 🎥🤝</li>
+        <li>졸업 진학 특별 학부모 면담：졸업 학년 봄 학기에 개최되며, 대학 진학에 대한 전담 지도 상담을 제공합니다 🎓</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3>🔐 2. 학부모 전용 포털</h3>
+      <p>학교에서 제공하는 학부모 전용 온라인 포털을 통해 자녀의 재학 성적, 출결 현황, 캠퍼스 공지, 과제 일정, 납부 기록 등을 실시간으로 확인하고, 자녀의 캠퍼스 생활과 성장 상황을 지속적으로 파악할 수 있습니다 📊📈.</p>
+    </div>
+    <div class="content-block">
+      <h3>📢 3. 학교 알림 시스템</h3>
+      <p>이메일, 문자 메시지, 학부모 전용 앱 3가지 채널로 구성된 알림 시스템을 운영하고 있습니다 📧📱. 캠퍼스 행사, 휴가 일정, 긴급 공지, 학업 알림 등 모든 정보를 망라하여 가정과 학교의 정보 동기화를 보장합니다 🤝.</p>
+    </div>
+    <div class="content-block">
+      <h3>🌍 4. 국제학생 학부모 전용 서비스</h3>
+      <p>캠퍼스 투어 가이드, 기숙사 생활 상담, 지역 생활 가이드를 제공합니다 🗺️. 국제학생 학부모 전담 코디네이터를 배치하여 문의 응대, 소통 지원, 가정-학교 연계 서비스를 전 과정에서 제공합니다 🧑🏫.</p>
+    </div>
+  </div>
+  <!-- 10 마무리와 부록 -->
+  <div id="ko-ending" class="section">
+    <div class="section-header"><div class="section-num">10</div><div class="section-titles"><h2>📎 마무리와 부록</h2><div class="section-subtitle">Final Words & Appendix</div></div></div>
+    <div class="content-block">
+      <p>Berwick Academy에 오신 것을 환영합니다 🎉! 200년 이상의 역사를 가진 본교는 고품질의 학업 교육을 제공할 뿐만 아니라, 따뜻하고 성장으로 가득한 유학 생활을 선사할 것입니다 💛.</p>
+      <p style="margin-top: 16px;">본 핸드북의 기숙사 생활 경험 내용은 모두 현재 재학 중인 국제학생의 실제 경험과 생생한 정보를 바탕으로 작성되었으며 ✨, 공식 정보는 Berwick Academy 공식 홈페이지에서 발췌했습니다. 이곳 생활에 빠르게 적응하고 불필요한 시행착오를 피할 수 있도록 돕기 위해 제작되었습니다 🚫❌. 낯선 이국 땅에서 미지의 환경에 불안을 느끼는 것은 지극히 자연스러운 일이니, 스스로에게 너무 많은 압박을 주지 마세요 😌.</p>
+      <p style="margin-top: 16px;">학교 국제학생 사무실, 기숙사 사감, 담당 교사, 그리고 이곳에서 먼저 학생 생활을 시작한 선배들은 여러분이 어려움을 겪을 때 언제든지 도움을 요청할 수 있는 든든한 존재입니다 🤝. Berwick Academy에서 보내는 모든 날들이 학업의 발전, 진심 어린 우정, 더 넓은 세상을 마주하고 더 나은 자신으로 성장하는 소중한 시간이 되기를 바랍니다 💪!</p>
+    </div>
+    <div class="student-quote">
+      <div class="quote-text">"이곳이 완벽한 장소는 아니지만, 여러분이 상상도 못한 만큼의 성장을 반드시 선사해 줄 곳입니다 📈. 조금만 용기를 내어 새로운 것에 도전하고, 사람들과 교류하고, 다양한 경험을 쌓아보세요. 분명 이곳을 사랑하게 될 거예요 💖."</div>
+      <div class="quote-attr">— 현 재학 중인 모든 국제 기숙사 학생 일동</div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="content-block">
+      <h3>📎 부록：긴급 연락처 목록</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📞</div>
+          <div class="card-title">학교 대표 전화</div>
+          <div class="card-body">+1 (207) 384-2164</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📧</div>
+          <div class="card-title">국제학생 사무실</div>
+          <div class="card-body">international@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👩‍💼</div>
+          <div class="card-title">전담 담당자</div>
+          <div class="card-body">Ms. Gabarro, mgabarro@berwickacademy.org</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <div class="card-title">24시간 긴급 핫라인</div>
+          <div class="card-body">+1 (207) 384-2169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 한국어판 푸터 -->
+  <footer>
+    <p class="gold">Berwick Academy · 글로벌 브릿지 프로젝트 🌉</p>
+    <p>본 핸드북 공식 정보는 Berwick Academy 홈페이지에서 발췌<br>학생 경험 내용은 현 기숙사 국제학생들이 집필<br>설립 1791년 · 메인주 사우스버윅</p>
+    <a href="#language-selector" class="switch-lang-btn">🔄 언어 전환</a>
+  </footer>
+</div>
